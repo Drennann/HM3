@@ -1,8 +1,8 @@
 import React from "react";
 import { Text } from "../Text";
 
-export function AccountCard(){
+export function AccountCard({accountData} : any){
     return(
-        <Text>AccountCard</Text>
+        <Text>{accountData.currentBalance}</Text>
     )
 }

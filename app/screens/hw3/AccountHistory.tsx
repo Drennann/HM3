@@ -52,7 +52,7 @@ export function AccountHistory() {
       // safeAreaEdges={["top", "bottom"]}
     >
       <Text>Account History</Text>
-      {accounts.map(account => <AccountCard key={account.id}/>)}
+      {accounts.map(account => <AccountCard key={account.id} accountData = {account}/>)}
       <RecentTransactions />
       <Menu />
     </Screen>
