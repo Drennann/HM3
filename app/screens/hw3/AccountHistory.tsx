@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { ViewStyle } from "react-native"
 import { Screen, Text } from "../../components"
-import { AccountCard } from "../../components/hw3/AccountCard"
 import { Menu } from "../../components/hw3/Menu"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
-import { spacing, colors } from "../../theme"
+import { spacing } from "../../theme"
 import axios from "axios"
 import MockAdapter from "axios-mock-adapter"
+import { ListAccounts } from "../../components/hw3/ListAccounts"
 
 const mock = new MockAdapter(axios)
 
@@ -52,8 +52,8 @@ export function AccountHistory() {
       // safeAreaEdges={["top", "bottom"]}
     >
       <Text>Account History</Text>
-      {accounts.map(account => <AccountCard key={account.id} accountData = {account}/>)}
-      <RecentTransactions />
+      <ListAccounts accounts = {accounts}/>
+      <RecentTransactions/>
       <Menu />
     </Screen>
   )
