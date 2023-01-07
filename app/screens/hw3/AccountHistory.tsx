@@ -63,6 +63,7 @@ export function AccountHistory() {
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.huge,
   paddingHorizontal: spacing.large,
+  minHeight:"100%"
 }
 
 const $screenContainer: ViewStyle = {
