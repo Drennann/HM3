@@ -48,10 +48,11 @@ export function AccountHistory() {
 
   return (
     <Screen
+      style={$screenContainer}
       contentContainerStyle={$screenContentContainer}
       // safeAreaEdges={["top", "bottom"]}
     >
-      <Text>Account History</Text>
+      <Text size="lg">Account History</Text>
       <ListAccounts accounts = {accounts}/>
       <RecentTransactions/>
       <Menu />
@@ -62,4 +63,8 @@ export function AccountHistory() {
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.huge,
   paddingHorizontal: spacing.large,
+}
+
+const $screenContainer: ViewStyle = {
+  backgroundColor: "#523cf8"
 }
