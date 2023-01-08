@@ -1,9 +1,14 @@
 import React from "react"
-import { FlatList } from "react-native"
+import { FlatList, View } from "react-native"
+import { Text } from "../Text"
 import { AccountCard } from "./AccountCard"
 
 export function ListAccounts({ accounts }: any) {
-  const renderItem = ({ item:account }) => <AccountCard accountData={account} />
+  const renderItem = ({ item: account }) => <AccountCard accountData={account} />
 
-  return <FlatList data={accounts} renderItem={renderItem} keyExtractor={(account) => account.id} />
+  return (
+    <View>
+      <FlatList data={accounts} renderItem={renderItem} keyExtractor={(account) => account.id} />
+    </View>
+  )
 }
