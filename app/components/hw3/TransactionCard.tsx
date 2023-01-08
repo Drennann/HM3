@@ -29,7 +29,7 @@ export function TransactionCard({ transactionData }: any) {
         <Text style={{textAlign: "left", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:"#C4C4C4"}}>{transactionData.date}</Text>
       </View>
       <View style={$TransactionCard_RightTextContainer}>
-        <Text style={{textAlign: "right", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:colorCode(transactionData.amount)}}>{transactionData.amount > 0 ? `+${transactionData.amount}` : `${transactionData.amount}`}</Text>
+        <Text style={{textAlign: "right", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:colorCode(transactionData.amount)}}>{transactionData.amount > 0 ? `+${transactionData.amount},00` : `${transactionData.amount},00`}</Text>
         <Text style={{textAlign: "right", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:"#C4C4C4"}}>{transactionData.coin}</Text>
       </View>
     </View>
