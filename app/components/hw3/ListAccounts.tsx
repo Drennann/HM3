@@ -21,7 +21,7 @@ export function ListAccounts({ accounts }: IProp) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const onMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const index = Math.ceil(event.nativeEvent.contentOffset.x / width);
+    const index = Math.ceil(event.nativeEvent.contentOffset.x / (width-30));
     setCurrentIndex(index)
   };
 
@@ -40,7 +40,7 @@ export function ListAccounts({ accounts }: IProp) {
       </View>
       <FlatList
         showsHorizontalScrollIndicator={false}
-        snapToInterval={width}
+        snapToInterval={width - 30}
         decelerationRate="fast"
         horizontal={true}
         data={accounts}

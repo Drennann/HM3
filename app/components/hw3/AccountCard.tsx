@@ -1,3 +1,4 @@
+import { intlFormat } from "date-fns"
 import React from "react"
 import { Pressable, useColorScheme } from "react-native"
 import { View, ViewStyle, Dimensions, Image, TextStyle } from "react-native"
@@ -16,6 +17,10 @@ const { width } = Dimensions.get("screen")
 export function AccountCard({ accountData }: IProp) {
 
   const theme = useColorScheme();
+
+  function currencyFormat(num: number) {
+    return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+ }
 
  // backgroundColor: theme === "light" ? colors.whiteBackground : colors.backgroundCardDark
   return (
@@ -39,7 +44,7 @@ export function AccountCard({ accountData }: IProp) {
         <Text style={{...$cardContainerCurrencyTypeContainerCurrencyDisabledText, color: colors[theme].description}}>GBP</Text>
       </View>
       <View>
-        <Text style={{...$cardContainerCurrentBalanceText, color: colors[theme].text}}>{accountData.currentBalance}</Text>
+        <Text style={{...$cardContainerCurrentBalanceText, color: colors[theme].text}}>{currencyFormat(accountData.currentBalance)}</Text>
         <Text style={{...$cardContainerDescriptionText, color: colors[theme].text}}>Current balance</Text>
       </View>
     </View>
@@ -53,7 +58,7 @@ const $cardContainer: ViewStyle = {
   paddingBottom: spacing.tiny,
   marginLeft: 15,
   marginRight:15,
-  width: width - 30,
+  width: width - 60,
   borderRadius: 25,
 }
 
