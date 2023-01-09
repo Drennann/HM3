@@ -5,8 +5,11 @@ import { TransactionCard } from "./TransactionCard"
 import img6 from "../images/RecentTransactions/FilterIcon.png"
 import { colors, spacing, typography } from "../../theme"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import { useColorScheme } from "react-native"
 
 export function RecentTransactions({ transactions }: any) {
+
+  const theme = useColorScheme()
 
   const renderItem = ({ item: transaction }) => (
     <TransactionCard
@@ -15,12 +18,12 @@ export function RecentTransactions({ transactions }: any) {
     />
   )
   return (
-    <View style={$RecentTransactionsContainer}>
+    <View style={{...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground}}>
       <View
         style={$RecentTransactionsTitleSection}
       >
         <Text
-          style={$RecentTransactionsTitleSectionText}
+          style={{...$RecentTransactionsTitleSectionText, color:colors[theme].text}}
         >
           Recent transactions
         </Text>
@@ -51,7 +54,7 @@ const $RecentTransactionsContainer: ViewStyle = {
 }
 
 const $RecentTransactionsTitleSection: ViewStyle = {
-  paddingBottom: spacing.large,
+  paddingBottom: spacing.extraSmall,
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",

@@ -29,7 +29,8 @@
         "image": "./assets/images/splash-logo-android-universal.png",
         "resizeMode": "contain",
         "backgroundColor": "#191015"
-      }
+      },
+      "userInterfaceStyle": "automatic"
     },
     "ios": {
       "icon": "./assets/images/app-icon-ios.png",
@@ -40,7 +41,8 @@
         "tabletImage": "./assets/images/splash-logo-ios-tablet.png",
         "resizeMode": "contain",
         "backgroundColor": "#191015"
-      }
+      },
+      "userInterfaceStyle": "automatic"
     },
     "web": {
       "favicon": "./assets/images/app-icon-web-favicon.png",
@@ -48,7 +50,8 @@
         "image": "./assets/images/splash-logo-web.png",
         "resizeMode": "contain",
         "backgroundColor": "#191015"
-      }
+      },
+      "userInterfaceStyle": "automatic"
     }
   }
 }

@@ -2,8 +2,11 @@ import React from "react"
 import { Image, TextStyle, View, ViewStyle } from "react-native"
 import { Text } from "../Text"
 import { colors, spacing, typography } from "../../theme"
+import { useColorScheme } from "react-native"
 
 export function TransactionCard({ transactionData, lastId }: any) {
+
+  const theme = useColorScheme()
   
   const colorCode = (n) => {
     let color = ""
@@ -19,23 +22,23 @@ export function TransactionCard({ transactionData, lastId }: any) {
       </View>
       <View
         style={
-          lastId ? $TransactionCardLeftTextContainerLastId : $TransactionCardLeftTextContainer
+          lastId ? $TransactionCardLeftTextContainerLastId : {...$TransactionCardLeftTextContainer, borderColor: colors[theme].border}
         }
       >
         <Text
-          style={$TransactionCardTitle}
+          style={{...$TransactionCardTitle, color:colors[theme].text}}
         >
           {transactionData.title}
         </Text>
         <Text
-          style={$TransactionCardDescriptionLeft}
+          style={{...$TransactionCardDescriptionLeft, color:colors[theme].description}}
         >
           {transactionData.date}
         </Text>
       </View>
       <View
         style={
-          lastId ? $TransactionCardRightTextContainerLastId : $TransactionCardRightTextContainer
+          lastId ? $TransactionCardRightTextContainerLastId : {...$TransactionCardRightTextContainer, borderColor: colors[theme].border}
         }
       >
         <Text
@@ -52,7 +55,7 @@ export function TransactionCard({ transactionData, lastId }: any) {
             : `${transactionData.amount},00`}
         </Text>
         <Text
-          style={$TransactionCardDescriptionRight}
+          style={{...$TransactionCardDescriptionRight , color:colors[theme].description}}
         >
           {transactionData.coin}
         </Text>
@@ -64,7 +67,7 @@ export function TransactionCard({ transactionData, lastId }: any) {
 const $TransactionCardContainer: ViewStyle = {
   display: "flex",
   flexDirection: "row",
-  marginBottom: 15,
+  marginBottom: spacing.tiny,
 }
 
 const $TransactionCardIcon: ViewStyle = {

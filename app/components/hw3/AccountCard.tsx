@@ -1,4 +1,5 @@
 import React from "react"
+import { useColorScheme } from "react-native"
 import { View, ViewStyle, Dimensions, Image, TextStyle } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Text } from "../"
@@ -8,12 +9,16 @@ import img1 from "../images/Main/More.png"
 const { width } = Dimensions.get("screen")
 
 export function AccountCard({ accountData }: any) {
+
+  const theme = useColorScheme();
+
+ // backgroundColor: theme === "light" ? colors.whiteBackground : colors.backgroundCardDark
   return (
-    <View style={$cardContainer}>
+    <View style={{...$cardContainer, backgroundColor: colors[theme].cardBackground}}>
       <View style={$cardContainerFirstSectionContainer}>
         <View>
-          <Text style={$cardContainerFirstSectionContainerTitle}>Current Account</Text>
-          <Text style={$cardContainerFirstSectionContainerTitleId}>{accountData.id}</Text>
+          <Text style={{...$cardContainerFirstSectionContainerTitle, color: colors[theme].text}}>Current Account</Text>
+          <Text style={{...$cardContainerFirstSectionContainerTitleId, color: colors[theme].description}}>{accountData.id}</Text>
         </View>
         <TouchableOpacity style={$cardContainerFirstSectionMoreLogo}>
           <Image source={img1}></Image>
@@ -23,11 +28,13 @@ export function AccountCard({ accountData }: any) {
         <View style={$cardContainerCurrencyTypeContainerCurrencyActivated}>
           <Text style={$cardContainerCurrencyTypeContainerCurrencyActivatedText}>EUR</Text>
         </View>
-        <Text style={$cardContainerCurrencyTypeContainerCurrencyDisabledText}>USD</Text>
-        <Text style={$cardContainerCurrencyTypeContainerCurrencyDisabledText}>GBP</Text>
+        <Text style={{...$cardContainerCurrencyTypeContainerCurrencyDisabledText, color: colors[theme].description}}>USD</Text>
+        <Text style={{...$cardContainerCurrencyTypeContainerCurrencyDisabledText, color: colors[theme].description}}>GBP</Text>
       </View>
-      <Text style={$cardContainerCurrentBalanceText}>{accountData.currentBalance}</Text>
-      <Text style={$cardContainerDescriptionText}>Current balance</Text>
+      <View>
+        <Text style={{...$cardContainerCurrentBalanceText, color: colors[theme].text}}>{accountData.currentBalance}</Text>
+        <Text style={{...$cardContainerDescriptionText, color: colors[theme].text}}>Current balance</Text>
+      </View>
     </View>
   )
 }
@@ -36,7 +43,7 @@ const $cardContainer: ViewStyle = {
   backgroundColor: "#FFFFFF",
   paddingHorizontal: 15,
   paddingTop: 10,
-  paddingBottom: 13,
+  paddingBottom: spacing.tiny,
   marginLeft: 15,
   width: width * 0.8,
   borderRadius: 25,
@@ -57,7 +64,7 @@ const $cardContainerFirstSectionContainerTitle: TextStyle = {
 const $cardContainerFirstSectionContainerTitleId: TextStyle = {
   fontFamily: typography.primary.semiBold,
   fontSize: 12,
-  marginBottom: 16,
+  marginBottom: spacing.tiny,
 }
 
 const $cardContainerFirstSectionMoreLogo: ViewStyle = {

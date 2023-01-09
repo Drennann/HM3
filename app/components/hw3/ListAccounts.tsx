@@ -3,6 +3,7 @@ import { FlatList, View, Dimensions, Image, ViewStyle } from "react-native"
 import { AccountCard } from "./AccountCard"
 import active from "../images/Main/active.png"
 import inactive from "../images/Main/inactive.png"
+import { spacing } from "../../theme"
 
 const { width } = Dimensions.get("screen")
 
@@ -46,5 +47,5 @@ const $DotsContainerDots: ViewStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   width: "12%",
-  paddingBottom: 21,
+  paddingBottom: spacing.extraSmall,
 }

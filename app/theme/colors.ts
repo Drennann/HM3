@@ -53,9 +53,11 @@ export const colors = {
   /**
    * The default text color in many components.
    */
-  text: palette.primaryText,
-  accountCardActivatedText : "#FEFEFE",
+  text: palette.primaryText, // #FEFEFE
+  textDark: "#FEFEFE",
+  accountCardActivatedText : "#FEFEFE", // 
   description: "#C4C4C4",
+  menuIcons: "#DCDCDC",
   /**
    * Secondary text information.
    */
@@ -63,7 +65,7 @@ export const colors = {
   /**
    * The default color of the screen background.
    */
-  background: palette.neutral200,
+  background: palette.neutral200, // #16110D
   /**
    * The default border color.
    */
@@ -86,7 +88,30 @@ export const colors = {
    */
   errorBackground: palette.angry100,
 
+  dark:{
+    background: "#16110D",
+    cardBackground: "#2F2E33",
+    description: "#646464",
+    text:"#FEFEFE",
+    border: "#646464",
+    id: "#646464",
+    currency: "#646464",
+    icon: "#646464"
+  },
+
+  light:{
+    background: "#523CF8",
+    cardBackground: "#FFFFFF",
+    description: "#646464",
+    text:"#16110D",
+    border: "#DCDCDC",
+    id: "#16110D",
+    currency: "#16110D",
+    icon: "#DCDCDC"
+  },
+
+
   orangeBackground: "#F76654",
   violetBackground: "#523CF8",
-  whiteBackground: "#FFFFFF"
+  whiteBackground: "#FFFFFF",
 }

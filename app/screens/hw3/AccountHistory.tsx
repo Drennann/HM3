@@ -5,7 +5,7 @@ import { Menu } from "../../components/hw3/Menu"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
 import axios from "axios"
 import MockAdapter from "axios-mock-adapter"
-import { colors, spacing } from "../../theme"
+import { colors, spacing, typography } from "../../theme"
 import { ListAccounts } from "../../components/hw3/ListAccounts"
 import img1 from "../../components/images/RecentTransactions/ComuteIcon.png"
 import img2 from "../../components/images/RecentTransactions/RestaurantIcon.png"
@@ -13,6 +13,7 @@ import img3 from "../../components/images/RecentTransactions/TravelIcon.png"
 import img4 from "../../components/images/RecentTransactions/PersonalTransactionIcon.png"
 import img5 from "../../components/images/RecentTransactions/businessTransactionIcon.png"
 import { TouchableOpacity } from "react-native-gesture-handler"
+import { useColorScheme } from "react-native"
 
 const mock = new MockAdapter(axios)
 
@@ -82,9 +83,14 @@ mock.onGet("/transactions").reply(200, {
   ],
 })
 
+
+
 export function AccountHistory() {
   const [accounts, setAccounts] = useState([])
   const [transactions, setTransactions] = useState([])
+
+    const theme = useColorScheme()
+    console.log(theme)
 
   useEffect(() => {
     try {
@@ -104,7 +110,7 @@ export function AccountHistory() {
       style={$screenContainer}
       // safeAreaEdges={["top", "bottom"]}
     >
-      <SafeAreaView style={$contentContainer}>
+      <SafeAreaView style={{...$contentContainer, backgroundColor: colors[theme].background}}>
         <View style={$TitleSection}>
           <View style={$TitleSectionLeftView}></View>
           <Text style={$TitleSectionText}>Account History</Text>
@@ -141,7 +147,7 @@ const $TitleSection: ViewStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginTop: spacing.huge,
+  marginTop: spacing.small,
   flexDirection: "row",
 }
 
@@ -153,4 +159,4 @@ const $TitleSectionRightView: ViewStyle = {
   marginRight: spacing.small,
 }
 
-const $TitleSectionText: TextStyle = { fontSize: 17, textAlign: "center", color: "white" }
+const $TitleSectionText: TextStyle = { fontSize: 17, textAlign: "center", color: "white", fontFamily:typography.primary.semiBold }
