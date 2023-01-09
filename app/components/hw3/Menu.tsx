@@ -1,5 +1,5 @@
 import React from "react"
-import { ViewStyle, Dimensions, Image } from "react-native"
+import { ViewStyle, Dimensions, Image, Pressable } from "react-native"
 import img1 from "../images/WalletIcon.png"
 import img2 from "../images/CardIcon.png"
 import img3 from "../images/AnalyticsIcon.png"
@@ -14,12 +14,12 @@ export function Menu() {
   const theme = useColorScheme()
 
   return (
-    <TouchableOpacity style={{...$menuContainer, backgroundColor: colors[theme].cardBackground}}>
+    <Pressable style={{...$menuContainer, backgroundColor: colors[theme].cardBackground}}>
       <Image source={img1} style={{...$menuIcon, tintColor:colors[theme].icon}}></Image>
       <Image source={img2} style={{...$menuIcon, tintColor:colors[theme].icon}}></Image>
       <Image source={img3}></Image>
       <Image source={img4} style={{...$menuIcon, tintColor:colors[theme].icon}}></Image>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 

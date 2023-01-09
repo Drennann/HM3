@@ -1,5 +1,5 @@
 import React from "react"
-import { View, ViewStyle, FlatList, Image, TextStyle } from "react-native"
+import { View, ViewStyle, FlatList, Image, TextStyle, Pressable } from "react-native"
 import { Text } from "../"
 import { TransactionCard } from "./TransactionCard"
 import img6 from "../images/RecentTransactions/FilterIcon.png"
@@ -35,11 +35,11 @@ export function RecentTransactions({ transactions }: IProp) {
         >
           Recent transactions
         </Text>
-        <TouchableOpacity
+        <Pressable
           style={$RecentTransactionsLogoContainer}
         >
           <Image source={img6}></Image>
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <FlatList
         data={transactions}

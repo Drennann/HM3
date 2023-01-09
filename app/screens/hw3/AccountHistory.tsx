@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { ViewStyle, Dimensions, View, SafeAreaView, Image, TextStyle } from "react-native"
+import { ViewStyle, Dimensions, View, SafeAreaView, Image, TextStyle, Pressable } from "react-native"
 import { Screen, Text } from "../../components"
 import { Menu } from "../../components/hw3/Menu"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
@@ -114,9 +114,11 @@ export function AccountHistory() {
         <View style={$TitleSection}>
           <View style={$TitleSectionLeftView}></View>
           <Text style={$TitleSectionText}>Account History</Text>
-          <TouchableOpacity style={$TitleSectionRightView}>
-            <Image source={require("../../components/images/Main/Settings.png")}></Image>
-          </TouchableOpacity>
+          <View style={$TitleSectionRightView}>
+            <Pressable>
+              <Image source={require("../../components/images/Main/Settings.png")}></Image>
+            </Pressable>
+          </View>
         </View>
 
         <ListAccounts accounts={accounts} />

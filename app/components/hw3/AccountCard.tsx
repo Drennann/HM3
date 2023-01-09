@@ -1,5 +1,5 @@
 import React from "react"
-import { useColorScheme } from "react-native"
+import { Pressable, useColorScheme } from "react-native"
 import { View, ViewStyle, Dimensions, Image, TextStyle } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Text } from "../"
@@ -25,9 +25,11 @@ export function AccountCard({ accountData }: IProp) {
           <Text style={{...$cardContainerFirstSectionContainerTitle, color: colors[theme].text}}>Current Account</Text>
           <Text style={{...$cardContainerFirstSectionContainerTitleId, color: colors[theme].description}}>{accountData.id}</Text>
         </View>
-        <TouchableOpacity style={$cardContainerFirstSectionMoreLogo}>
-          <Image source={img1}></Image>
-        </TouchableOpacity>
+        <View style={$cardContainerFirstSectionMoreLogo}>
+          <Pressable style={$LogoContainer}>
+            <Image source={img1}></Image>
+          </Pressable>
+        </View>
       </View>
       <View style={$cardContainerCurrencyTypeContainer}>
         <View style={$cardContainerCurrencyTypeContainerCurrencyActivated}>
@@ -53,6 +55,15 @@ const $cardContainer: ViewStyle = {
   marginRight:15,
   width: width - 30,
   borderRadius: 25,
+}
+
+const $LogoContainer: ViewStyle = {
+  width: 40,
+  height: 40,
+  borderRadius: 20,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 const $cardContainerFirstSectionContainer: ViewStyle = {
