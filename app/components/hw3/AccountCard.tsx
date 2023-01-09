@@ -1,5 +1,6 @@
 import React from "react"
 import { View, ViewStyle, Dimensions, Image, TextStyle } from "react-native"
+import { TouchableOpacity } from "react-native-gesture-handler"
 import { Text } from "../"
 import { colors, spacing, typography } from "../../theme"
 import img1 from "../images/Main/More.png"
@@ -14,9 +15,9 @@ export function AccountCard({ accountData }: any) {
           <Text style={$cardContainerFirstSectionContainerTitle}>Current Account</Text>
           <Text style={$cardContainerFirstSectionContainerTitleId}>{accountData.id}</Text>
         </View>
-        <View style={$cardContainerFirstSectionMoreLogo}>
+        <TouchableOpacity style={$cardContainerFirstSectionMoreLogo}>
           <Image source={img1}></Image>
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={$cardContainerCurrencyTypeContainer}>
         <View style={$cardContainerCurrencyTypeContainerCurrencyActivated}>

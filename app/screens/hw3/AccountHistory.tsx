@@ -12,6 +12,7 @@ import img2 from "../../components/images/RecentTransactions/RestaurantIcon.png"
 import img3 from "../../components/images/RecentTransactions/TravelIcon.png"
 import img4 from "../../components/images/RecentTransactions/PersonalTransactionIcon.png"
 import img5 from "../../components/images/RecentTransactions/businessTransactionIcon.png"
+import { TouchableOpacity } from "react-native-gesture-handler"
 
 const mock = new MockAdapter(axios)
 
@@ -107,9 +108,9 @@ export function AccountHistory() {
         <View style={$TitleSection}>
           <View style={$TitleSectionLeftView}></View>
           <Text style={$TitleSectionText}>Account History</Text>
-          <View style={$TitleSectionRightView}>
+          <TouchableOpacity style={$TitleSectionRightView}>
             <Image source={require("../../components/images/Main/Settings.png")}></Image>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <ListAccounts accounts={accounts} />
@@ -149,7 +150,7 @@ const $TitleSectionLeftView: ViewStyle = {
 }
 
 const $TitleSectionRightView: ViewStyle = {
-  marginLeft: spacing.small,
+  marginRight: spacing.small,
 }
 
 const $TitleSectionText: TextStyle = { fontSize: 17, textAlign: "center", color: "white" }

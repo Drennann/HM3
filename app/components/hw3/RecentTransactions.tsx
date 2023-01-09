@@ -4,6 +4,7 @@ import { Text } from "../"
 import { TransactionCard } from "./TransactionCard"
 import img6 from "../images/RecentTransactions/FilterIcon.png"
 import { colors, spacing, typography } from "../../theme"
+import { TouchableOpacity } from "react-native-gesture-handler"
 
 export function RecentTransactions({ transactions }: any) {
 
@@ -23,11 +24,11 @@ export function RecentTransactions({ transactions }: any) {
         >
           Recent transactions
         </Text>
-        <View
+        <TouchableOpacity
           style={$RecentTransactionsLogoContainer}
         >
           <Image source={img6}></Image>
-        </View>
+        </TouchableOpacity>
       </View>
       <FlatList
         data={transactions}
