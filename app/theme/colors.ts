@@ -55,6 +55,7 @@ export const colors = {
    */
   text: palette.primaryText,
   accountCardActivatedText : "#FEFEFE",
+  description: "#C4C4C4",
   /**
    * Secondary text information.
    */
