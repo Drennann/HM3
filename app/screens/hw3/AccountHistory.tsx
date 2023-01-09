@@ -149,7 +149,7 @@ const $TitleSection: ViewStyle = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginTop: spacing.small,
+  marginTop: spacing.large,
   flexDirection: "row",
 }
 

@@ -57,8 +57,8 @@ export function TransactionCard({ transactionData, lastId }: IProp) {
           }}
         >
           {transactionData.amount > 0
-            ? `+${transactionData.amount},00`
-            : `${transactionData.amount},00`}
+            ? `+${transactionData.amount.toFixed(2)}`
+            : `${transactionData.amount.toFixed(2)}`}
         </Text>
         <Text
           style={{...$TransactionCardDescriptionRight , color:colors[theme].description}}
