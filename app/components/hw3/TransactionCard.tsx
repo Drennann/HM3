@@ -1,13 +1,9 @@
 import React from "react"
 import { Image, TextStyle, View, ViewStyle } from "react-native"
 import { Text } from "../Text"
-import { useFonts, Montserrat_600SemiBold } from "@expo-google-fonts/montserrat"
 import { colors, spacing, typography } from "../../theme"
 
 export function TransactionCard({ transactionData, lastId }: any) {
-  const [fontsLoaded] = useFonts({
-    Montserrat_600SemiBold,
-  })
   
   const colorCode = (n) => {
     let color = ""
@@ -15,9 +11,6 @@ export function TransactionCard({ transactionData, lastId }: any) {
     return color
   }
 
-  if (!fontsLoaded) {
-    return null
-  }
 
   return (
     <View style={$TransactionCardContainer}>
