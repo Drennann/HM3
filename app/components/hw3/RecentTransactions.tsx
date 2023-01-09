@@ -6,12 +6,20 @@ import img6 from "../images/RecentTransactions/FilterIcon.png"
 import { colors, spacing, typography } from "../../theme"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useColorScheme } from "react-native"
+import { transaction } from "../../interfaces/interfaces"
 
-export function RecentTransactions({ transactions }: any) {
+interface IProp {
+  transactions: transaction[]
+}
+interface IRender{
+  item: transaction
+}
+
+export function RecentTransactions({ transactions }: IProp) {
 
   const theme = useColorScheme()
 
-  const renderItem = ({ item: transaction }) => (
+  const renderItem = ({ item: transaction }: IRender) => (
     <TransactionCard
       transactionData={transaction}
       lastId={transactions[transactions.length - 1].id === transaction.id}

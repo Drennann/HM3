@@ -1,22 +1,31 @@
 import React, { useState } from "react"
-import { FlatList, View, Dimensions, Image, ViewStyle } from "react-native"
+import { FlatList, View, Dimensions, Image, ViewStyle, NativeSyntheticEvent, NativeScrollEvent } from "react-native"
 import { AccountCard } from "./AccountCard"
 import active from "../images/Main/active.png"
 import inactive from "../images/Main/inactive.png"
 import { spacing } from "../../theme"
+import { account } from "../../interfaces/interfaces"
+
+interface IProp {
+  accounts : account[]
+}
+
+interface IRender {
+  item: account
+}
 
 const { width } = Dimensions.get("screen")
 
-export function ListAccounts({ accounts }: any) {
+export function ListAccounts({ accounts }: IProp) {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const onMomentumScrollEnd = (e) => {
-    const index = Math.ceil(e.nativeEvent.contentOffset.x / width);
+  const onMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const index = Math.ceil(event.nativeEvent.contentOffset.x / width);
     setCurrentIndex(index)
   };
 
-  const renderItem = ({ item: account }) => <AccountCard accountData={account} />
+  const renderItem = ({ item: account }:IRender) => <AccountCard accountData={account} />
 
   return (
     <View>

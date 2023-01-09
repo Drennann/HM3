@@ -3,12 +3,17 @@ import { useColorScheme } from "react-native"
 import { View, ViewStyle, Dimensions, Image, TextStyle } from "react-native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Text } from "../"
+import { account } from "../../interfaces/interfaces"
 import { colors, spacing, typography } from "../../theme"
 import img1 from "../images/Main/More.png"
 
+interface IProp {
+  accountData : account
+}
+
 const { width } = Dimensions.get("screen")
 
-export function AccountCard({ accountData }: any) {
+export function AccountCard({ accountData }: IProp) {
 
   const theme = useColorScheme();
 

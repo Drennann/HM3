@@ -3,12 +3,18 @@ import { Image, TextStyle, View, ViewStyle } from "react-native"
 import { Text } from "../Text"
 import { colors, spacing, typography } from "../../theme"
 import { useColorScheme } from "react-native"
+import { transaction } from "../../interfaces/interfaces"
 
-export function TransactionCard({ transactionData, lastId }: any) {
+interface IProp {
+  transactionData: transaction,
+  lastId: boolean
+}
+
+export function TransactionCard({ transactionData, lastId }: IProp) {
 
   const theme = useColorScheme()
   
-  const colorCode = (n) => {
+  const colorCode = (n:number) => {
     let color = ""
     n > 0 ? (color = "#523CF8") : (color = "#F76654")
     return color

@@ -14,6 +14,7 @@ import img4 from "../../components/images/RecentTransactions/PersonalTransaction
 import img5 from "../../components/images/RecentTransactions/businessTransactionIcon.png"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { useColorScheme } from "react-native"
+import { account, transaction } from "../../interfaces/interfaces"
 
 const mock = new MockAdapter(axios)
 
@@ -86,11 +87,10 @@ mock.onGet("/transactions").reply(200, {
 
 
 export function AccountHistory() {
-  const [accounts, setAccounts] = useState([])
-  const [transactions, setTransactions] = useState([])
+  const [accounts, setAccounts] = useState<account[]>([])
+  const [transactions, setTransactions] = useState<transaction[]>([])
 
     const theme = useColorScheme()
-    console.log(theme)
 
   useEffect(() => {
     try {
