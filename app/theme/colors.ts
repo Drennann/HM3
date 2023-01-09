@@ -1,6 +1,8 @@
 // TODO: write documentation for colors and palette in own markdown file and add links from here
 
 const palette = {
+  primaryText: "#16110D",
+  
   neutral100: "#FFFFFF",
   neutral200: "#F4F2F1",
   neutral300: "#D7CEC9",
@@ -51,7 +53,8 @@ export const colors = {
   /**
    * The default text color in many components.
    */
-  text: palette.neutral800,
+  text: palette.primaryText,
+  accountCardActivatedText : "#FEFEFE",
   /**
    * Secondary text information.
    */
@@ -81,4 +84,8 @@ export const colors = {
    *
    */
   errorBackground: palette.angry100,
+
+  orangeBackground: "#F76654",
+  violetBackground: "#523CF8",
+  whiteBackground: "#FFFFFF"
 }

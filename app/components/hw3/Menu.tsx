@@ -4,6 +4,7 @@ import img1 from "../images/WalletIcon.png"
 import img2 from "../images/CardIcon.png"
 import img3 from "../images/AnalyticsIcon.png"
 import img4 from "../images/Payments.png"
+import { colors } from "../../theme"
 
 export function Menu() {
   return (
@@ -23,7 +24,7 @@ const $menuContainer: ViewStyle = {
   flexDirection: "row",
   justifyContent:"space-evenly",
   alignItems:"center",
-  backgroundColor: "#FFFFFF",
+  backgroundColor: colors.whiteBackground,
   borderTopLeftRadius: 30,
   borderTopRightRadius: 30,
   width,

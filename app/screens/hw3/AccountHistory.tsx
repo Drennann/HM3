@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { ViewStyle, Dimensions, View, SafeAreaView, Image } from "react-native"
+import { ViewStyle, Dimensions, View, SafeAreaView, Image, TextStyle } from "react-native"
 import { Screen, Text } from "../../components"
 import { Menu } from "../../components/hw3/Menu"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
 import axios from "axios"
 import MockAdapter from "axios-mock-adapter"
+import { colors, spacing } from "../../theme"
 import { ListAccounts } from "../../components/hw3/ListAccounts"
 import img1 from "../../components/images/RecentTransactions/ComuteIcon.png"
 import img2 from "../../components/images/RecentTransactions/RestaurantIcon.png"
@@ -103,12 +104,10 @@ export function AccountHistory() {
       // safeAreaEdges={["top", "bottom"]}
     >
       <SafeAreaView style={$contentContainer}>
-        <View
-          style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 50, flexDirection:"row", }}
-        >
-          <View style={{marginLeft:36}}></View>
-          <Text style={{ fontSize: 17, textAlign: "center", color: "white" }}>Account History</Text>
-          <View style={{marginRight:16}}>
+        <View style={$TitleSection}>
+          <View style={$TitleSectionLeftView}></View>
+          <Text style={$TitleSectionText}>Account History</Text>
+          <View style={$TitleSectionRightView}>
             <Image source={require("../../components/images/Main/Settings.png")}></Image>
           </View>
         </View>
@@ -124,7 +123,7 @@ export function AccountHistory() {
 const { width, height } = Dimensions.get("window")
 
 const $screenContainer: ViewStyle = {
-  backgroundColor: "#523cf8",
+  backgroundColor: colors.violetBackground,
   minHeight: height,
   width,
 }
@@ -136,3 +135,21 @@ const $contentContainer: ViewStyle = {
   width,
   height,
 }
+
+const $TitleSection: ViewStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginTop: spacing.huge,
+  flexDirection: "row",
+}
+
+const $TitleSectionLeftView: ViewStyle = {
+  marginLeft: spacing.extraLarge,
+}
+
+const $TitleSectionRightView: ViewStyle = {
+  marginLeft: spacing.small,
+}
+
+const $TitleSectionText: TextStyle = { fontSize: 17, textAlign: "center", color: "white" }
