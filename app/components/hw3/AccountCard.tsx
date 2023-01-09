@@ -45,7 +45,8 @@ const $cardContainer: ViewStyle = {
   paddingTop: 10,
   paddingBottom: spacing.tiny,
   marginLeft: 15,
-  width: width * 0.8,
+  marginRight:15,
+  width: width - 30,
   borderRadius: 25,
 }
 

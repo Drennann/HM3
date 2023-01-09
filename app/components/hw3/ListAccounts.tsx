@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { FlatList, View, Dimensions, Image, ViewStyle } from "react-native"
 import { AccountCard } from "./AccountCard"
 import active from "../images/Main/active.png"
@@ -8,6 +8,14 @@ import { spacing } from "../../theme"
 const { width } = Dimensions.get("screen")
 
 export function ListAccounts({ accounts }: any) {
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onMomentumScrollEnd = (e) => {
+    const index = Math.ceil(e.nativeEvent.contentOffset.x / width);
+    setCurrentIndex(index)
+  };
+
   const renderItem = ({ item: account }) => <AccountCard accountData={account} />
 
   return (
@@ -16,19 +24,19 @@ export function ListAccounts({ accounts }: any) {
         <View
           style={$DotsContainerDots}
         >
-          <Image source={active}></Image>
-          <Image source={inactive}></Image>
-          <Image source={inactive}></Image>
-          <Image source={inactive}></Image>
+          {accounts.map((acc, index) => {
+            return (<Image source={index === currentIndex ? active : inactive} key={index}></Image>)
+          })}
         </View>
       </View>
       <FlatList
         showsHorizontalScrollIndicator={false}
-        snapToInterval={width * 0.8 + 15}
+        snapToInterval={width}
         decelerationRate="fast"
         horizontal={true}
         data={accounts}
         renderItem={renderItem}
+        onMomentumScrollEnd={onMomentumScrollEnd}
         keyExtractor={(account) => account.id}
       />
     </View>
