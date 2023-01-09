@@ -3,7 +3,7 @@ import { Image, View, ViewStyle } from "react-native"
 import { Text } from "../Text"
 import { useFonts, Montserrat_600SemiBold } from "@expo-google-fonts/montserrat"
 
-export function TransactionCard({ transactionData }: any) {
+export function TransactionCard({ transactionData, lastId }: any) {
 
   const [fontsLoaded] = useFonts({
     Montserrat_600SemiBold,
@@ -24,11 +24,11 @@ export function TransactionCard({ transactionData }: any) {
       <View style={$TransactionCard_Icon}>
         <Image source={transactionData.img}></Image>
       </View>
-      <View style={$TransactionCard_LeftTextContainer}>
+      <View style={lastId? $TransactionCard_LeftTextContainerLastId : $TransactionCard_LeftTextContainer}>
         <Text style={{textAlign: "left", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:"#16110D"}}>{transactionData.title}</Text>
         <Text style={{textAlign: "left", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:"#C4C4C4"}}>{transactionData.date}</Text>
       </View>
-      <View style={$TransactionCard_RightTextContainer}>
+      <View style={lastId? $TransactionCard_RightTextContainerLastId : $TransactionCard_RightTextContainer}>
         <Text style={{textAlign: "right", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:colorCode(transactionData.amount)}}>{transactionData.amount > 0 ? `+${transactionData.amount},00` : `${transactionData.amount},00`}</Text>
         <Text style={{textAlign: "right", lineHeight:15, fontSize:12, fontFamily:"Montserrat_600SemiBold", color:"#C4C4C4"}}>{transactionData.coin}</Text>
       </View>
@@ -57,12 +57,21 @@ const $TransactionCardContainer: ViewStyle = {
     width:"20%",
     borderBottomWidth: 1,
     borderColor: "#DCDCDC",
-    paddingBottom: 15
+    paddingBottom: 13
+  }
+
+  const $TransactionCard_RightTextContainerLastId: ViewStyle = {
+    width:"20%",
   }
 
   const $TransactionCard_LeftTextContainer: ViewStyle = {
     width:"62%",
     borderBottomWidth: 1,
     borderColor: "#DCDCDC",
-    paddingBottom: 15
+    paddingBottom: 13
   }
+
+  const $TransactionCard_LeftTextContainerLastId: ViewStyle = {
+    width:"62%",
+  }
+

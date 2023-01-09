@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { ViewStyle, Dimensions, View } from "react-native"
+import { ViewStyle, Dimensions, View, SafeAreaView, Image } from "react-native"
 import { Screen, Text } from "../../components"
 import { Menu } from "../../components/hw3/Menu"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
@@ -43,7 +43,7 @@ mock.onGet("/transactions").reply(200, {
       date: "20th May, 18:39",
       amount: -345.0,
       coin: "EUR",
-      img: img1
+      img: img1,
     },
     {
       id: `"Francois" Restaurant Dinner`,
@@ -51,7 +51,7 @@ mock.onGet("/transactions").reply(200, {
       date: "15th May, 20:56",
       amount: -1158.0,
       coin: "EUR",
-      img: img2
+      img: img2,
     },
     {
       id: `"AirMax" Travel to Paris`,
@@ -59,7 +59,7 @@ mock.onGet("/transactions").reply(200, {
       date: "14th May, 16:00",
       amount: -813.0,
       coin: "EUR",
-      img: img3
+      img: img3,
     },
     {
       id: `Construction ltd`,
@@ -67,7 +67,7 @@ mock.onGet("/transactions").reply(200, {
       date: "11th May, 09:26",
       amount: 24500.0,
       coin: "USD",
-      img: img4
+      img: img4,
     },
     {
       id: `Robert Smith`,
@@ -75,8 +75,8 @@ mock.onGet("/transactions").reply(200, {
       date: "03rd May, 12:06",
       amount: 11215.0,
       coin: "USD",
-      img: img5
-    }
+      img: img5,
+    },
   ],
 })
 
@@ -102,17 +102,26 @@ export function AccountHistory() {
       style={$screenContainer}
       // safeAreaEdges={["top", "bottom"]}
     >
-      <View style={$contentContainer}>
-        <Text size="lg">Account History</Text>
+      <SafeAreaView style={$contentContainer}>
+        <View
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 50, flexDirection:"row", }}
+        >
+          <View style={{marginLeft:36}}></View>
+          <Text style={{ fontSize: 17, textAlign: "center", color: "white" }}>Account History</Text>
+          <View style={{marginRight:16}}>
+            <Image source={require("../../components/images/Main/Settings.png")}></Image>
+          </View>
+        </View>
+
         <ListAccounts accounts={accounts} />
-        <RecentTransactions transactions = {transactions}/>
+        <RecentTransactions transactions={transactions} />
         <Menu />
-      </View>
+      </SafeAreaView>
     </Screen>
   )
 }
 
-const { width, height } = Dimensions.get("screen")
+const { width, height } = Dimensions.get("window")
 
 const $screenContainer: ViewStyle = {
   backgroundColor: "#523cf8",
@@ -125,4 +134,5 @@ const $contentContainer: ViewStyle = {
   flexDirection: "column",
   justifyContent: "space-between",
   width,
+  height,
 }

@@ -27,5 +27,5 @@ const $menuContainer: ViewStyle = {
   borderTopLeftRadius: 30,
   borderTopRightRadius: 30,
   width,
-  height: 96,
+  height: 96
 }

@@ -2,7 +2,7 @@ import React from "react"
 import { View, ViewStyle, Dimensions, Image } from "react-native"
 import { Text } from "../"
 import { useFonts, Montserrat_600SemiBold, Montserrat_700Bold } from "@expo-google-fonts/montserrat"
-import img1 from "../images/RecentTransactions/FilterIcon.png"
+import img1 from "../images/Main/More.png"
 
 const { width } = Dimensions.get("screen")
 
@@ -61,7 +61,7 @@ export function AccountCard({ accountData }: any) {
       <Text style={{ fontFamily: "Montserrat_700Bold", lineHeight: 41, fontSize: 34 }}>
         {accountData.currentBalance}
       </Text>
-      <Text style={{fontSize: 15 }}>Current Balance</Text>
+      <Text style={{fontSize: 15 }}>Current balance</Text>
     </View>
   )
 }
