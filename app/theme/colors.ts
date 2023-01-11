@@ -55,7 +55,7 @@ export const colors = {
    */
   text: palette.primaryText, // #FEFEFE
   textDark: "#FEFEFE",
-  accountCardActivatedText : "#FEFEFE", // 
+  AccountCardActivatedText : "#FEFEFE", // 
   description: "#C4C4C4",
   menuIcons: "#DCDCDC",
   /**

@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react"
-import { ViewStyle, Dimensions, View, SafeAreaView, Image, TextStyle, Pressable } from "react-native"
+import {
+  ViewStyle,
+  Dimensions,
+  View,
+  SafeAreaView,
+  Image,
+  TextStyle,
+  Pressable,
+  useColorScheme,
+} from "react-native"
 import { Screen, Text } from "../../components"
 import { Menu } from "../../components/hw3/Menu"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
@@ -12,14 +21,12 @@ import img2 from "../../components/images/RecentTransactions/RestaurantIcon.png"
 import img3 from "../../components/images/RecentTransactions/TravelIcon.png"
 import img4 from "../../components/images/RecentTransactions/PersonalTransactionIcon.png"
 import img5 from "../../components/images/RecentTransactions/businessTransactionIcon.png"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import { useColorScheme } from "react-native"
-import { account, transaction } from "../../interfaces/interfaces"
+import { Account, Transaction } from "../../interfaces/interfaces"
 
 const mock = new MockAdapter(axios)
 
-mock.onGet("/accounts").reply(200, {
-  accounts: [
+mock.onGet("/Accounts").reply(200, {
+  Accounts: [
     {
       id: "1234-4567-3456-3456",
       currentBalance: 76451.0,
@@ -39,8 +46,8 @@ mock.onGet("/accounts").reply(200, {
   ],
 })
 
-mock.onGet("/transactions").reply(200, {
-  transactions: [
+mock.onGet("/Transactions").reply(200, {
+  Transactions: [
     {
       id: `"Golub" Taxi Transportation`,
       title: `"Golub" Taxi Transportation`,
@@ -84,21 +91,21 @@ mock.onGet("/transactions").reply(200, {
   ],
 })
 
-
-
 export function AccountHistory() {
-  const [accounts, setAccounts] = useState<account[]>([])
-  const [transactions, setTransactions] = useState<transaction[]>([])
+  const [Accounts, setAccounts] = useState<Account[]>([])
+  const [Transactions, setTransactions] = useState<Transaction[]>([])
 
-    const theme = useColorScheme()
+  const theme = useColorScheme()
 
   useEffect(() => {
     try {
       ;(async () => {
-        const responseAccounts = await axios.get("/accounts")
-        const responseTransactions = await axios.get("/transactions")
-        setAccounts(responseAccounts.data.accounts)
-        setTransactions(responseTransactions.data.transactions)
+        const [responseAccounts, responseTransactions] = await Promise.all([
+          axios.get("/Accounts"),
+          axios.get("/Transactions"),
+        ])
+        setAccounts(responseAccounts.data.Accounts)
+        setTransactions(responseTransactions.data.Transactions)
       })()
     } catch (error) {
       console.log(error)
@@ -110,7 +117,7 @@ export function AccountHistory() {
       style={$screenContainer}
       // safeAreaEdges={["top", "bottom"]}
     >
-      <SafeAreaView style={{...$contentContainer, backgroundColor: colors[theme].background}}>
+      <SafeAreaView style={{ ...$contentContainer, backgroundColor: colors[theme].background }}>
         <View style={$TitleSection}>
           <View style={$TitleSectionLeftView}></View>
           <Text style={$TitleSectionText}>Account History</Text>
@@ -121,8 +128,8 @@ export function AccountHistory() {
           </View>
         </View>
 
-        <ListAccounts accounts={accounts} />
-        <RecentTransactions transactions={transactions} />
+        <ListAccounts Accounts={Accounts} />
+        <RecentTransactions Transactions={Transactions} />
         <Menu />
       </SafeAreaView>
     </Screen>
@@ -133,8 +140,6 @@ const { width, height } = Dimensions.get("window")
 
 const $screenContainer: ViewStyle = {
   backgroundColor: colors.violetBackground,
-  minHeight: height,
-  width,
 }
 
 const $contentContainer: ViewStyle = {
@@ -161,4 +166,9 @@ const $TitleSectionRightView: ViewStyle = {
   marginRight: spacing.small,
 }
 
-const $TitleSectionText: TextStyle = { fontSize: 17, textAlign: "center", color: "white", fontFamily:typography.primary.semiBold }
+const $TitleSectionText: TextStyle = {
+  fontSize: 17,
+  textAlign: "center",
+  color: "white",
+  fontFamily: typography.primary.semiBold,
+}

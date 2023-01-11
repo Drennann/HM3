@@ -1,9 +1,9 @@
-export interface account {
+export interface Account {
   id: string
   currentBalance: number
 }
 
-export interface transaction {
+export interface Transaction {
   id: string
   title: string
   date: string

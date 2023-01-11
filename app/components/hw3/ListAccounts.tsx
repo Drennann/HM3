@@ -1,40 +1,44 @@
 import React, { useState } from "react"
-import { FlatList, View, Dimensions, Image, ViewStyle, NativeSyntheticEvent, NativeScrollEvent } from "react-native"
+import {
+  FlatList,
+  View,
+  Dimensions,
+  Image,
+  ViewStyle,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  ListRenderItem,
+} from "react-native"
 import { AccountCard } from "./AccountCard"
 import active from "../images/Main/active.png"
 import inactive from "../images/Main/inactive.png"
 import { spacing } from "../../theme"
-import { account } from "../../interfaces/interfaces"
+import { Account } from "../../interfaces/interfaces"
 
-interface IProp {
-  accounts : account[]
-}
-
-interface IRender {
-  item: account
+interface ListAccountsProps {
+  Accounts: Account[]
 }
 
 const { width } = Dimensions.get("screen")
 
-export function ListAccounts({ accounts }: IProp) {
-
-  const [currentIndex, setCurrentIndex] = useState(0);
+export function ListAccounts({ Accounts }: ListAccountsProps) {
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   const onMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const index = Math.ceil(event.nativeEvent.contentOffset.x / (width-30));
+    const index = Math.ceil(event.nativeEvent.contentOffset.x / (width - 30))
     setCurrentIndex(index)
-  };
+  }
 
-  const renderItem = ({ item: account }:IRender) => <AccountCard accountData={account} />
+  const renderItem: ListRenderItem<Account> = ({ item: Account }) => (
+    <AccountCard AccountData={Account} />
+  )
 
   return (
     <View>
       <View style={$DotsContainer}>
-        <View
-          style={$DotsContainerDots}
-        >
-          {accounts.map((acc, index) => {
-            return (<Image source={index === currentIndex ? active : inactive} key={index}></Image>)
+        <View style={$DotsContainerDots}>
+          {Accounts.map((acc, index) => {
+            return <Image source={index === currentIndex ? active : inactive} key={index}></Image>
           })}
         </View>
       </View>
@@ -43,10 +47,10 @@ export function ListAccounts({ accounts }: IProp) {
         snapToInterval={width - 30}
         decelerationRate="fast"
         horizontal={true}
-        data={accounts}
+        data={Accounts}
         renderItem={renderItem}
         onMomentumScrollEnd={onMomentumScrollEnd}
-        keyExtractor={(account) => account.id}
+        keyExtractor={(Account) => Account.id}
       />
     </View>
   )

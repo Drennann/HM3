@@ -1,50 +1,49 @@
 import React from "react"
-import { View, ViewStyle, FlatList, Image, TextStyle, Pressable } from "react-native"
+import {
+  View,
+  ViewStyle,
+  FlatList,
+  Image,
+  TextStyle,
+  Pressable,
+  useColorScheme,
+  ListRenderItem,
+} from "react-native"
 import { Text } from "../"
 import { TransactionCard } from "./TransactionCard"
 import img6 from "../images/RecentTransactions/FilterIcon.png"
 import { colors, spacing, typography } from "../../theme"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import { useColorScheme } from "react-native"
-import { transaction } from "../../interfaces/interfaces"
+import { Transaction } from "../../interfaces/interfaces"
 
-interface IProp {
-  transactions: transaction[]
-}
-interface IRender{
-  item: transaction
+interface RecentTransactionsProps {
+  Transactions: Transaction[]
 }
 
-export function RecentTransactions({ transactions }: IProp) {
-
+export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
   const theme = useColorScheme()
 
-  const renderItem = ({ item: transaction }: IRender) => (
+  const renderItem: ListRenderItem<Transaction> = ({ item: Transaction }) => (
     <TransactionCard
-      transactionData={transaction}
-      lastId={transactions[transactions.length - 1].id === transaction.id}
+      TransactionData={Transaction}
+      lastId={Transactions[Transactions.length - 1].id === Transaction.id}
     />
   )
   return (
-    <View style={{...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground}}>
-      <View
-        style={$RecentTransactionsTitleSection}
-      >
-        <Text
-          style={{...$RecentTransactionsTitleSectionText, color:colors[theme].text}}
-        >
-          Recent transactions
+    <View
+      style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground }}
+    >
+      <View style={$RecentTransactionsTitleSection}>
+        <Text style={{ ...$RecentTransactionsTitleSectionText, color: colors[theme].text }}>
+          Recent Transactions
         </Text>
-        <Pressable
-          style={$RecentTransactionsLogoContainer}
-        >
+        <Pressable style={$RecentTransactionsLogoContainer}>
           <Image source={img6}></Image>
         </Pressable>
       </View>
       <FlatList
-        data={transactions}
+        data={Transactions}
         renderItem={renderItem}
-        keyExtractor={(transaction) => transaction.id}
+        keyExtractor={(Transaction) => Transaction.id}
       />
     </View>
   )

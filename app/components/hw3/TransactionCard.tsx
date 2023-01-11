@@ -1,69 +1,56 @@
 import React from "react"
-import { Image, TextStyle, View, ViewStyle } from "react-native"
+import { Image, TextStyle, View, ViewStyle, useColorScheme } from "react-native"
 import { Text } from "../Text"
 import { colors, spacing, typography } from "../../theme"
-import { useColorScheme } from "react-native"
-import { transaction } from "../../interfaces/interfaces"
+import { Transaction } from "../../interfaces/interfaces"
 
-interface IProp {
-  transactionData: transaction,
+interface TransactionCardProps {
+  TransactionData: Transaction
   lastId: boolean
 }
 
-export function TransactionCard({ transactionData, lastId }: IProp) {
+const colorCode = (n: number) => {
+  let color = ""
+  n > 0 ? (color = "#523CF8") : (color = "#F76654")
+  return color
+}
 
+export function TransactionCard({ TransactionData, lastId }: TransactionCardProps) {
   const theme = useColorScheme()
-  
-  const colorCode = (n:number) => {
-    let color = ""
-    n > 0 ? (color = "#523CF8") : (color = "#F76654")
-    return color
-  }
-
 
   return (
     <View style={$TransactionCardContainer}>
       <View style={$TransactionCardIcon}>
-        <Image source={transactionData.img}></Image>
+        <Image source={TransactionData.img}></Image>
       </View>
       <View
         style={
-          lastId ? $TransactionCardLeftTextContainerLastId : {...$TransactionCardLeftTextContainer, borderColor: colors[theme].border}
+          lastId
+            ? $TransactionCardLeftTextContainerLastId
+            : { ...$TransactionCardLeftTextContainer, borderColor: colors[theme].border }
         }
       >
-        <Text
-          style={{...$TransactionCardTitle, color:colors[theme].text}}
-        >
-          {transactionData.title}
+        <Text style={{ ...$TransactionCardTitle, color: colors[theme].text }}>
+          {TransactionData.title}
         </Text>
-        <Text
-          style={{...$TransactionCardDescriptionLeft, color:colors[theme].description}}
-        >
-          {transactionData.date}
+        <Text style={{ ...$TransactionCardDescriptionLeft, color: colors[theme].description }}>
+          {TransactionData.date}
         </Text>
       </View>
       <View
         style={
-          lastId ? $TransactionCardRightTextContainerLastId : {...$TransactionCardRightTextContainer, borderColor: colors[theme].border}
+          lastId
+            ? $TransactionCardRightTextContainerLastId
+            : { ...$TransactionCardRightTextContainer, borderColor: colors[theme].border }
         }
       >
-        <Text
-          style={{
-            textAlign: "right",
-            lineHeight: 15,
-            fontSize: 12,
-            fontFamily: typography.primary.semiBold,
-            color: colorCode(transactionData.amount),
-          }}
-        >
-          {transactionData.amount > 0
-            ? `+${transactionData.amount.toFixed(2)}`
-            : `${transactionData.amount.toFixed(2)}`}
+        <Text style={{ ...$TransactionCardAmount, color: colorCode(TransactionData.amount) }}>
+          {TransactionData.amount > 0
+            ? `+${TransactionData.amount.toFixed(2)}`
+            : `${TransactionData.amount.toFixed(2)}`}
         </Text>
-        <Text
-          style={{...$TransactionCardDescriptionRight , color:colors[theme].description}}
-        >
-          {transactionData.coin}
+        <Text style={{ ...$TransactionCardDescriptionRight, color: colors[theme].description }}>
+          {TransactionData.coin}
         </Text>
       </View>
     </View>
@@ -74,6 +61,13 @@ const $TransactionCardContainer: ViewStyle = {
   display: "flex",
   flexDirection: "row",
   marginBottom: spacing.tiny,
+}
+
+const $TransactionCardAmount: TextStyle = {
+  textAlign: "right",
+  lineHeight: 15,
+  fontSize: 12,
+  fontFamily: typography.primary.semiBold,
 }
 
 const $TransactionCardIcon: ViewStyle = {
@@ -121,7 +115,7 @@ const $TransactionCardDescriptionLeft: TextStyle = {
   lineHeight: 15,
   fontSize: 12,
   fontFamily: typography.primary.semiBold,
-  color: colors.description
+  color: colors.description,
 }
 
 const $TransactionCardDescriptionRight: TextStyle = {
