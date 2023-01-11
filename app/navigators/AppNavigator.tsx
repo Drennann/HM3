@@ -17,6 +17,83 @@ import { useColorScheme } from "react-native"
 import Config from "../config"
 import { AccountHistory } from "../screens/hw3/AccountHistory"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
+import img1 from "../components/images/RecentTransactions/ComuteIcon.png"
+import img2 from "../components/images/RecentTransactions/RestaurantIcon.png"
+import img3 from "../components/images/RecentTransactions/TravelIcon.png"
+import img4 from "../components/images/RecentTransactions/PersonalTransactionIcon.png"
+import img5 from "../components/images/RecentTransactions/businessTransactionIcon.png"
+import axios from "axios"
+import MockAdapter from "axios-mock-adapter"
+import { DemoNavigator } from "./DemoNavigator"
+import { MenuNavigator } from "../components/hw3/Menu"
+
+const mock = new MockAdapter(axios)
+
+mock.onGet("/Accounts").reply(200, {
+  Accounts: [
+    {
+      id: "1234-4567-3456-3456",
+      currentBalance: 76451.0,
+    },
+    {
+      id: "1234-4567-3456-3457",
+      currentBalance: 499.0,
+    },
+    {
+      id: "1234-4567-3456-3458",
+      currentBalance: 4503.0,
+    },
+    {
+      id: "1234-4567-3456-3459",
+      currentBalance: 99999.5,
+    },
+  ],
+})
+
+mock.onGet("/Transactions").reply(200, {
+  Transactions: [
+    {
+      id: `"Golub" Taxi Transportation`,
+      title: `"Golub" Taxi Transportation`,
+      date: "20th May, 18:39",
+      amount: -345.0,
+      coin: "EUR",
+      img: img1,
+    },
+    {
+      id: `"Francois" Restaurant Dinner`,
+      title: `"Francois" Restaurant Dinner`,
+      date: "15th May, 20:56",
+      amount: -1158.0,
+      coin: "EUR",
+      img: img2,
+    },
+    {
+      id: `"AirMax" Travel to Paris`,
+      title: `"AirMax" Travel to Paris`,
+      date: "14th May, 16:00",
+      amount: -813.0,
+      coin: "EUR",
+      img: img3,
+    },
+    {
+      id: `Construction ltd`,
+      title: `Construction ltd`,
+      date: "11th May, 09:26",
+      amount: 24500.0,
+      coin: "USD",
+      img: img4,
+    },
+    {
+      id: `Robert Smith`,
+      title: `Robert Smith`,
+      date: "03rd May, 12:06",
+      amount: 11215.0,
+      coin: "USD",
+      img: img5,
+    },
+  ],
+})
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -54,7 +131,7 @@ const AppStack = observer(function AppStack() {
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="AccountHistory" component={AccountHistory}></Stack.Screen>
+      <Stack.Screen name="AccountHistory" component={MenuNavigator}></Stack.Screen>
     </Stack.Navigator>
   )
 })

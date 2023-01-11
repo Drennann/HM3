@@ -38,10 +38,7 @@ export function DemoNavigator() {
         headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: [$tabBar, { height: bottom + 70 }],
-        tabBarActiveTintColor: colors.text,
-        tabBarInactiveTintColor: colors.text,
-        tabBarLabelStyle: $tabBarLabel,
-        tabBarItemStyle: $tabBarItem,
+        tabBarActiveBackgroundColor:"red"
       }}
     >
       <Tab.Screen
@@ -86,17 +83,6 @@ export function DemoNavigator() {
 const $tabBar: ViewStyle = {
   backgroundColor: colors.background,
   borderTopColor: colors.transparent,
-}
-
-const $tabBarItem: ViewStyle = {
-  paddingTop: spacing.medium,
-}
-
-const $tabBarLabel: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.medium,
-  lineHeight: 16,
-  flex: 1,
 }
 
 // @demo remove-file

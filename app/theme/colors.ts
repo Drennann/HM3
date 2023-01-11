@@ -96,7 +96,9 @@ export const colors = {
     border: "#646464",
     id: "#646464",
     currency: "#646464",
-    icon: "#646464"
+    icon: "#646464",
+    iconActivated: "#523CF8",
+    iconDesactivated:"#DCDCDC"
   },
 
   light:{
@@ -107,8 +109,12 @@ export const colors = {
     border: "#DCDCDC",
     id: "#16110D",
     currency: "#16110D",
-    icon: "#DCDCDC"
+    icon: "#DCDCDC",
+    iconActivated: "#523CF8",
+    iconDesactivated:"#646464"
   },
+
+
 
 
   orangeBackground: "#F76654",
