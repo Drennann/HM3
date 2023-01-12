@@ -131,7 +131,7 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false, animation:"fade_from_bottom" }}
     >
       <Stack.Screen name="Home" component={MenuNavigator}></Stack.Screen>
       <Stack.Screen name="Settings" component={SettingsScreen}></Stack.Screen>

@@ -50,24 +50,11 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
       />
       {route.name === "AccountHistory" && (
         <Pressable
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#F76654",
-            width: 100,
-            alignSelf: "center",
-            borderRadius: 10,
-            marginTop: 15,
-          }}
+          style={$ViewAllButton}
           onPress={() => navigate("AllTransactions")}
         >
           <Text
-            style={{
-              color: colors[theme].text,
-              fontSize: 14,
-              fontFamily: typography.primary.semiBold,
-            }}
+            style={{...$ViewAllButtonText, color: colors[theme].text}}
           >
             View All
           </Text>
@@ -79,7 +66,7 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
 
 const $RecentTransactionsContainer: ViewStyle = {
   backgroundColor: colors.whiteBackground,
-  width: 365,
+  width: "93%",
   marginLeft: "auto",
   marginRight: "auto",
   borderRadius: 30,
@@ -110,4 +97,20 @@ const $RecentTransactionsLogoContainer: ViewStyle = {
   justifyContent: "center",
   alignItems: "center",
   borderRadius: 15,
+}
+
+const $ViewAllButton : ViewStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#F76654",
+  width: 100,
+  alignSelf: "center",
+  borderRadius: 10,
+  marginTop: 15,
+}
+
+const $ViewAllButtonText : TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.semiBold,
 }

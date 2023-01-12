@@ -59,5 +59,5 @@ const $PlaceHolder: ViewStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height,
+  minHeight: height,
 }

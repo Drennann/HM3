@@ -73,7 +73,8 @@ const $contentContainer: ViewStyle = {
   flexDirection: "column",
   justifyContent: "space-evenly",
   width,
-  height: height-96,
+  minHeight: height,
+  paddingBottom: 96
 }
 
 const $TitleSection: ViewStyle = {
