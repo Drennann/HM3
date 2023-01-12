@@ -15,7 +15,6 @@ import { observer } from "mobx-react-lite"
 import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
-import { AccountHistory } from "../screens/hw3/AccountHistory"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import img1 from "../components/images/RecentTransactions/ComuteIcon.png"
 import img2 from "../components/images/RecentTransactions/RestaurantIcon.png"
@@ -24,8 +23,9 @@ import img4 from "../components/images/RecentTransactions/PersonalTransactionIco
 import img5 from "../components/images/RecentTransactions/businessTransactionIcon.png"
 import axios from "axios"
 import MockAdapter from "axios-mock-adapter"
-import { DemoNavigator } from "./DemoNavigator"
 import { MenuNavigator } from "../components/hw3/Menu"
+import { SettingsScreen } from "../screens/SettingsScreen"
+import { AllTransactionsScreen } from "../screens/AllTransactionsScreen"
 
 const mock = new MockAdapter(axios)
 
@@ -109,7 +109,9 @@ mock.onGet("/Transactions").reply(200, {
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  AccountHistory: undefined
+  Home: undefined,
+  Settings: undefined,
+  AllTransactions: undefined
 }
 
 /**
@@ -131,7 +133,9 @@ const AppStack = observer(function AppStack() {
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="AccountHistory" component={MenuNavigator}></Stack.Screen>
+      <Stack.Screen name="Home" component={MenuNavigator}></Stack.Screen>
+      <Stack.Screen name="Settings" component={SettingsScreen}></Stack.Screen>
+      <Stack.Screen name="AllTransactions" component={AllTransactionsScreen}></Stack.Screen>
     </Stack.Navigator>
   )
 })

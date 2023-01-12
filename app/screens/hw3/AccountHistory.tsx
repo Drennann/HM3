@@ -10,12 +10,12 @@ import {
   useColorScheme,
 } from "react-native"
 import { Screen, Text } from "../../components"
-import { Menu } from "../../components/hw3/Menu"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
 import axios from "axios"
 import { colors, spacing, typography } from "../../theme"
 import { ListAccounts } from "../../components/hw3/ListAccounts"
 import { Account, Transaction } from "../../interfaces/interfaces"
+import { navigate } from "../../navigators"
 
 
 export function AccountHistory() {
@@ -49,7 +49,7 @@ export function AccountHistory() {
           <View style={$TitleSectionLeftView}></View>
           <Text style={$TitleSectionText}>Account History</Text>
           <View style={$TitleSectionRightView}>
-            <Pressable>
+            <Pressable onPress={()=>navigate("Settings")}>
               <Image source={require("../../components/images/Main/Settings.png")}></Image>
             </Pressable>
           </View>

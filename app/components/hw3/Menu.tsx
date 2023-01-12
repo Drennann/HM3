@@ -1,15 +1,12 @@
 import React from "react"
-import { ViewStyle, Dimensions, Image, Pressable, useColorScheme, ImageStyle } from "react-native"
+import { Image, useColorScheme, ImageStyle } from "react-native"
 import img1 from "../images/WalletIcon.png"
 import img2 from "../images/CardIcon.png"
 import img3 from "../images/AnalyticsIcon.png"
 import img4 from "../images/Payments.png"
-import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { CompositeScreenProps } from "@react-navigation/native"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { AppStackParamList, AppStackScreenProps } from "../../navigators/AppNavigator"
 import { DashboardScreen } from "../../screens/DashboardScreen"
-import { Icon } from "../Icon"
 import { CardsScreen } from "../../screens/CardsScreen"
 import { PaymentsScreen } from "../../screens/PaymentsScreen"
 import { AccountHistory } from "../../screens/hw3/AccountHistory"
@@ -21,7 +18,7 @@ export type MenuParamList = {
   AccountHistory: undefined
   Payments: undefined
 }
-const Menu = createBottomTabNavigator<MenuParamList>()
+const Switch = createBottomTabNavigator<MenuParamList>()
 
 export function MenuNavigator() {
 
@@ -29,19 +26,16 @@ export function MenuNavigator() {
   const theme = useColorScheme()
 
   return (
-    <Menu.Navigator
+    <Switch.Navigator
 
     screenOptions={{
       headerShown: false,
-      tabBarStyle: [{ height: bottom + 96 , backgroundColor: colors[theme].cardBackground}],
+      tabBarStyle: [{ height: bottom + 96 , backgroundColor: colors[theme].cardBackground, position:"absolute", borderTopLeftRadius:30, borderTopRightRadius:30}],
       tabBarShowLabel:false,
-      // tabBarLabelStyle: $tabBarLabel,
-      // tabBarItemStyle: $tabBarItem,
-
     }}
 
   >
-    <Menu.Screen
+    <Switch.Screen
       name="Dashboard"
       component={DashboardScreen}
       options={{
@@ -49,7 +43,7 @@ export function MenuNavigator() {
       }}
     />
 
-    <Menu.Screen
+    <Switch.Screen
       name="Cards"
       component={CardsScreen}
       options={{
@@ -57,7 +51,7 @@ export function MenuNavigator() {
       }}
     />
 
-    <Menu.Screen
+    <Switch.Screen
       name="AccountHistory"
       component={AccountHistory}
       options={{
@@ -65,30 +59,15 @@ export function MenuNavigator() {
       }}
     />
 
-    <Menu.Screen
+    <Switch.Screen
       name="Payments"
       component={PaymentsScreen}
       options={{
-        tabBarItemStyle:{borderTopRightRadius:30},
         tabBarIcon: ({ focused }) => <Image source={img4} style={focused? $menuIconActivated : ({tintColor: colors[theme].iconDesactivated})}></Image>,
       }}
     />
-  </Menu.Navigator>
+  </Switch.Navigator>
   )
-}
-
-const { width } = Dimensions.get("window")
-
-const $menuContainer: ViewStyle = {
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-evenly",
-  alignItems: "center",
-  backgroundColor: colors.whiteBackground,
-  borderTopLeftRadius: 30,
-  borderTopRightRadius: 30,
-  width,
-  height: 96,
 }
 
 const $menuIconActivated: ImageStyle = { tintColor: colors.light.iconActivated }

@@ -1,9 +1,10 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { Dimensions, TextStyle, useColorScheme, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../navigators"
 import { Screen, Text } from "../components"
+import { colors, typography } from "../theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -22,13 +23,33 @@ export const CardsScreen: FC<StackScreenProps<AppStackScreenProps, "Cards">> = o
 
   // Pull in navigation via hook
   // const navigation = useNavigation()
+
+  const theme = useColorScheme()
+
   return (
     <Screen style={$root} preset="scroll">
-      <Text text="cards" />
-    </Screen>
+    <View style={{ ...$PlaceHolder, backgroundColor: colors[theme].background }}>
+      <Text text="Cards" style={{ ...$PlaceHolderText, color: colors[theme].text }} />
+    </View>
+  </Screen>
   )
 })
 
 const $root: ViewStyle = {
   flex: 1,
+}
+
+
+const { height } = Dimensions.get("screen")
+const $PlaceHolder: ViewStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height,
+}
+
+const $PlaceHolderText: TextStyle = {
+  fontFamily: typography.primary.semiBold,
+  fontSize: 30,
+  lineHeight:35
 }
