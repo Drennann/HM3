@@ -20,6 +20,8 @@ export type MenuParamList = {
 }
 const Switch = createBottomTabNavigator<MenuParamList>()
 
+export const BAR_HEIGHT = 96;
+
 export function MenuNavigator() {
 
   const { bottom } = useSafeAreaInsets()
@@ -30,7 +32,7 @@ export function MenuNavigator() {
 
     screenOptions={{
       headerShown: false,
-      tabBarStyle: [{ height: bottom + 96 , backgroundColor: colors[theme].cardBackground, position:"absolute", borderTopLeftRadius:30, borderTopRightRadius:30}],
+      tabBarStyle: [{ height: bottom + BAR_HEIGHT , backgroundColor: colors[theme].cardBackground, position:"absolute", borderTopLeftRadius:30, borderTopRightRadius:30}],
       tabBarShowLabel:false,
     }}
 

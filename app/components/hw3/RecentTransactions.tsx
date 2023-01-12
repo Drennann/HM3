@@ -16,6 +16,7 @@ import { colors, spacing, typography } from "../../theme"
 import { Transaction } from "../../interfaces/interfaces"
 import { navigate } from "../../navigators"
 import { useRoute } from "@react-navigation/native"
+import { ScrollView } from "react-native-gesture-handler"
 
 interface RecentTransactionsProps {
   Transactions: Transaction[]
@@ -32,35 +33,31 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
     />
   )
   return (
-    <View
-      style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground }}
-    >
-      <View style={$RecentTransactionsTitleSection}>
-        <Text style={{ ...$RecentTransactionsTitleSectionText, color: colors[theme].text }}>
-          Recent Transactions
-        </Text>
-        <Pressable style={$RecentTransactionsLogoContainer}>
-          <Image source={img6}></Image>
-        </Pressable>
-      </View>
-      <FlatList
-        data={Transactions}
-        renderItem={renderItem}
-        keyExtractor={(Transaction) => Transaction.id}
-      />
-      {route.name === "AccountHistory" && (
-        <Pressable
-          style={$ViewAllButton}
-          onPress={() => navigate("AllTransactions")}
-        >
-          <Text
-            style={{...$ViewAllButtonText, color: colors[theme].text}}
-          >
-            View All
+    <ScrollView>
+      <View
+        style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground }}
+      >
+        <View style={$RecentTransactionsTitleSection}>
+          <Text style={{ ...$RecentTransactionsTitleSectionText, color: colors[theme].text }}>
+            Recent Transactions
           </Text>
-        </Pressable>
-      )}
-    </View>
+          <Pressable style={$RecentTransactionsLogoContainer}>
+            <Image source={img6}></Image>
+          </Pressable>
+        </View>
+        <FlatList
+          scrollEnabled={false}
+          data={Transactions}
+          renderItem={renderItem}
+          keyExtractor={(Transaction) => Transaction.id}
+        />
+        {route.name === "AccountHistory" && (
+          <Pressable style={$ViewAllButton} onPress={() => navigate("AllTransactions")}>
+            <Text style={{ ...$ViewAllButtonText, color: colors[theme].text }}>View All</Text>
+          </Pressable>
+        )}
+      </View>
+    </ScrollView>
   )
 }
 
@@ -73,6 +70,7 @@ const $RecentTransactionsContainer: ViewStyle = {
   paddingHorizontal: spacing.large,
   paddingTop: spacing.medium,
   paddingBottom: spacing.medium,
+  marginVertical:spacing.medium
 }
 
 const $RecentTransactionsTitleSection: ViewStyle = {
@@ -99,7 +97,7 @@ const $RecentTransactionsLogoContainer: ViewStyle = {
   borderRadius: 15,
 }
 
-const $ViewAllButton : ViewStyle = {
+const $ViewAllButton: ViewStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -110,7 +108,7 @@ const $ViewAllButton : ViewStyle = {
   marginTop: 15,
 }
 
-const $ViewAllButtonText : TextStyle = {
+const $ViewAllButtonText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }

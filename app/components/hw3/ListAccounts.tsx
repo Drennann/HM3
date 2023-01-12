@@ -34,7 +34,7 @@ export function ListAccounts({ Accounts }: ListAccountsProps) {
   )
 
   return (
-    <View>
+    <View style={$container}>
       <View style={$DotsContainer}>
         <View style={$DotsContainerDots}>
           {Accounts.map((acc, index) => {
@@ -54,6 +54,9 @@ export function ListAccounts({ Accounts }: ListAccountsProps) {
       />
     </View>
   )
+}
+const $container : ViewStyle = {
+  marginBottom:spacing.medium
 }
 
 const $DotsContainer: ViewStyle = {

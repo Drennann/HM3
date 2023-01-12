@@ -66,6 +66,7 @@ const { width, height } = Dimensions.get("window")
 
 const $screenContainer: ViewStyle = {
   backgroundColor: colors.violetBackground,
+  paddingVertical:spacing.medium
 }
 
 const $contentContainer: ViewStyle = {
