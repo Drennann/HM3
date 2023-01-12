@@ -46,7 +46,6 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
           </Pressable>
         </View>
         <FlatList
-          scrollEnabled={false}
           data={Transactions}
           renderItem={renderItem}
           keyExtractor={(Transaction) => Transaction.id}
@@ -63,14 +62,14 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
 
 const $RecentTransactionsContainer: ViewStyle = {
   backgroundColor: colors.whiteBackground,
-  width: "93%",
+  width: 365,
   marginLeft: "auto",
   marginRight: "auto",
   borderRadius: 30,
   paddingHorizontal: spacing.large,
   paddingTop: spacing.medium,
   paddingBottom: spacing.medium,
-  marginVertical:spacing.medium
+  marginVertical:20
 }
 
 const $RecentTransactionsTitleSection: ViewStyle = {
