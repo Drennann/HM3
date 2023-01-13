@@ -82,25 +82,23 @@ const $TransactionCardIcon: ViewStyle = {
 }
 
 const $TransactionCardRightTextContainer: ViewStyle = {
-  width: "20%",
+  flex:1,
   borderBottomWidth: 1,
   borderColor: "#DCDCDC",
   paddingBottom: 13,
 }
 
 const $TransactionCardRightTextContainerLastId: ViewStyle = {
-  width: "20%",
+  flex:1
 }
 
 const $TransactionCardLeftTextContainer: ViewStyle = {
-  width: "62%",
   borderBottomWidth: 1,
   borderColor: "#DCDCDC",
   paddingBottom: 13,
 }
 
 const $TransactionCardLeftTextContainerLastId: ViewStyle = {
-  width: "62%",
 }
 
 const $TransactionCardTitle: TextStyle = {

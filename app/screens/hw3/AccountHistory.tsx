@@ -16,13 +16,16 @@ import { colors, spacing, typography } from "../../theme"
 import { ListAccounts } from "../../components/hw3/ListAccounts"
 import { Account, Transaction } from "../../interfaces/interfaces"
 import { navigate } from "../../navigators"
-
+import { ScrollView } from "react-native-gesture-handler"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { BAR_HEIGHT } from "../../components/hw3/Menu"
 
 export function AccountHistory() {
   const [Accounts, setAccounts] = useState<Account[]>([])
   const [Transactions, setTransactions] = useState<Transaction[]>([])
 
   const theme = useColorScheme()
+  const {bottom} = useSafeAreaInsets();
 
   useEffect(() => {
     try {
@@ -41,22 +44,24 @@ export function AccountHistory() {
 
   return (
     <Screen
-      style={{...$screenContainer, backgroundColor: colors[theme].background}}
+      style={{ ...$screenContainer, backgroundColor: colors[theme].background }}
       // safeAreaEdges={["top", "bottom"]}
     >
-      <SafeAreaView style={{ ...$contentContainer, backgroundColor: colors[theme].background }}>
-        <View style={$TitleSection}>
-          <View style={$TitleSectionLeftView}></View>
-          <Text style={$TitleSectionText}>Account History</Text>
-          <View style={$TitleSectionRightView}>
-            <Pressable onPress={()=>navigate("Settings")}>
-              <Image source={require("../../components/images/Main/Settings.png")}></Image>
-            </Pressable>
+      <SafeAreaView style={{ ...$contentContainer, backgroundColor: colors[theme].background, paddingBottom: BAR_HEIGHT + bottom + spacing.medium }}>
+        <ScrollView>
+          <View style={$TitleSection}>
+            <View style={$TitleSectionLeftView}></View>
+            <Text style={$TitleSectionText}>Account History</Text>
+            <View style={$TitleSectionRightView}>
+              <Pressable onPress={() => navigate("Settings")}>
+                <Image source={require("../../components/images/Main/Settings.png")}></Image>
+              </Pressable>
+            </View>
           </View>
-        </View>
 
-        <ListAccounts Accounts={Accounts} />
-        <RecentTransactions Transactions={Transactions} />
+          <ListAccounts Accounts={Accounts} />
+          <RecentTransactions Transactions={Transactions} />
+        </ScrollView>
       </SafeAreaView>
     </Screen>
   )
@@ -66,16 +71,15 @@ const { width, height } = Dimensions.get("window")
 
 const $screenContainer: ViewStyle = {
   backgroundColor: colors.violetBackground,
-  paddingVertical:spacing.medium
+  paddingVertical: spacing.medium,
 }
 
 const $contentContainer: ViewStyle = {
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-evenly",
+  justifyContent: "space-between",
   width,
   minHeight: height,
-  paddingBottom: 96
 }
 
 const $TitleSection: ViewStyle = {

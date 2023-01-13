@@ -56,7 +56,7 @@ export function ListAccounts({ Accounts }: ListAccountsProps) {
   )
 }
 const $container : ViewStyle = {
-  marginBottom:spacing.medium
+  marginVertical:spacing.tiny
 }
 
 const $DotsContainer: ViewStyle = {

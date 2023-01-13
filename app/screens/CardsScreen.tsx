@@ -41,11 +41,12 @@ const $root: ViewStyle = {
 
 
 const { height } = Dimensions.get("screen")
+
 const $PlaceHolder: ViewStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height,
+  height
 }
 
 const $PlaceHolderText: TextStyle = {

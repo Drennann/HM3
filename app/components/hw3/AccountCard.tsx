@@ -89,8 +89,7 @@ export const NECCESARY_MAGIC_NUMBER = 60 // It's show's 30px of the next card, a
 const $cardContainer: ViewStyle = {
   backgroundColor: "#FFFFFF",
   paddingHorizontal: ACCOUNT_CARD_HORIZONTAL_PADDING,
-  paddingTop: spacing.small,
-  paddingBottom: spacing.tiny,
+  paddingVertical:spacing.medium,
   marginHorizontal: ACCOUNT_CARD_HORIZONTAL_MARGIN,
   width: width - NECCESARY_MAGIC_NUMBER,
   borderRadius: 25,

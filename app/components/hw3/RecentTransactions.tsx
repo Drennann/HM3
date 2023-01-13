@@ -16,7 +16,6 @@ import { colors, spacing, typography } from "../../theme"
 import { Transaction } from "../../interfaces/interfaces"
 import { navigate } from "../../navigators"
 import { useRoute } from "@react-navigation/native"
-import { ScrollView } from "react-native-gesture-handler"
 
 interface RecentTransactionsProps {
   Transactions: Transaction[]
@@ -33,9 +32,9 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
     />
   )
   return (
-    <ScrollView>
+    <View>
       <View
-        style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground }}
+        style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground, }}
       >
         <View style={$RecentTransactionsTitleSection}>
           <Text style={{ ...$RecentTransactionsTitleSectionText, color: colors[theme].text }}>
@@ -46,7 +45,7 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
           </Pressable>
         </View>
         <FlatList
-          data={Transactions}
+          data={route.name === "AccountHistory" ? Transactions.slice(0,5) : Transactions}
           renderItem={renderItem}
           keyExtractor={(Transaction) => Transaction.id}
         />
@@ -56,7 +55,7 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
           </Pressable>
         )}
       </View>
-    </ScrollView>
+    </View>
   )
 }
 
@@ -69,7 +68,7 @@ const $RecentTransactionsContainer: ViewStyle = {
   paddingHorizontal: spacing.large,
   paddingTop: spacing.medium,
   paddingBottom: spacing.medium,
-  marginVertical:20
+  marginVertical:spacing.small
 }
 
 const $RecentTransactionsTitleSection: ViewStyle = {
