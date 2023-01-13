@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import {
   ViewStyle,
   Dimensions,
@@ -8,6 +8,7 @@ import {
   TextStyle,
   Pressable,
   useColorScheme,
+  Animated,
 } from "react-native"
 import { Screen, Text } from "../../components"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
@@ -24,8 +25,23 @@ export function AccountHistory() {
   const [Accounts, setAccounts] = useState<Account[]>([])
   const [Transactions, setTransactions] = useState<Transaction[]>([])
 
+  const translation = useRef(new Animated.Value(100)).current
+  const opacity = useRef(new Animated.Value(0)).current
+
   const theme = useColorScheme()
-  const {bottom} = useSafeAreaInsets();
+  const { bottom } = useSafeAreaInsets()
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(translation, {
+        toValue: 0,
+        useNativeDriver: true,
+        delay: 300,
+        duration: 700,
+      }),
+      Animated.timing(opacity, { toValue: 1, useNativeDriver: true, delay: 300, duration: 700 }),
+    ]).start()
+  }, [])
 
   useEffect(() => {
     try {
@@ -47,8 +63,15 @@ export function AccountHistory() {
       style={{ ...$screenContainer, backgroundColor: colors[theme].background }}
       // safeAreaEdges={["top", "bottom"]}
     >
-      <SafeAreaView style={{ ...$contentContainer, backgroundColor: colors[theme].background, paddingBottom: BAR_HEIGHT + bottom + spacing.medium }}>
-        <ScrollView>
+      <SafeAreaView
+        style={{
+          ...$contentContainer,
+          backgroundColor: colors[theme].background,
+          paddingBottom: BAR_HEIGHT + bottom + spacing.medium,
+        }}
+      >
+        <Animated.ScrollView style={{ transform: [{ translateY: translation }], opacity }}>
+          {/* <Animated.View style={{...$animatedBox}}></Animated.View> */}
           <View style={$TitleSection}>
             <View style={$TitleSectionLeftView}></View>
             <Text style={$TitleSectionText}>Account History</Text>
@@ -61,7 +84,7 @@ export function AccountHistory() {
 
           <ListAccounts Accounts={Accounts} />
           <RecentTransactions Transactions={Transactions} />
-        </ScrollView>
+        </Animated.ScrollView>
       </SafeAreaView>
     </Screen>
   )
@@ -80,6 +103,12 @@ const $contentContainer: ViewStyle = {
   justifyContent: "space-between",
   width,
   minHeight: height,
+}
+
+const $animatedBox: ViewStyle = {
+  width: 100,
+  height: 100,
+  backgroundColor: "orange",
 }
 
 const $TitleSection: ViewStyle = {
