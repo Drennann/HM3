@@ -17,7 +17,6 @@ import { colors, spacing, typography } from "../../theme"
 import { ListAccounts } from "../../components/hw3/ListAccounts"
 import { Account, Transaction } from "../../interfaces/interfaces"
 import { navigate } from "../../navigators"
-import { ScrollView } from "react-native-gesture-handler"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { BAR_HEIGHT } from "../../components/hw3/Menu"
 
@@ -83,7 +82,7 @@ export function AccountHistory() {
           </View>
 
           <ListAccounts Accounts={Accounts} />
-          <RecentTransactions Transactions={Transactions} />
+          <RecentTransactions Transactions={Transactions}/>
         </Animated.ScrollView>
       </SafeAreaView>
     </Screen>
@@ -105,11 +104,11 @@ const $contentContainer: ViewStyle = {
   minHeight: height,
 }
 
-const $animatedBox: ViewStyle = {
+/* const $animatedBox: ViewStyle = {
   width: 100,
   height: 100,
   backgroundColor: "orange",
-}
+} */
 
 const $TitleSection: ViewStyle = {
   display: "flex",

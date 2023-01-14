@@ -4,11 +4,7 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from "@react-navigation/native"
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
@@ -99,79 +95,159 @@ mock.onGet("/Transactions").reply(200, {
       amount: 98765.0,
       coin: "USD",
       img: img5,
-      },
-      {
+    },
+    {
       id: "David Rodriguez",
       title: "David Rodriguez",
       date: "28th November, 20:15",
       amount: 24689.0,
       coin: "USD",
       img: img4,
-      },
-      {
+    },
+    {
       id: "Jessica Garcia",
       title: "Jessica Garcia",
       date: "12th October, 09:00",
       amount: 13579.0,
       coin: "USD",
       img: img3,
-      },
-      {
+    },
+    {
       id: "Richard Martinez",
       title: "Richard Martinez",
       date: "01st March, 14:45",
       amount: 86420.0,
       coin: "USD",
       img: img2,
-      },
-      {
+    },
+    {
       id: "Maria Robinson",
       title: "Maria Robinson",
       date: "19th August, 18:30",
       amount: 75316.0,
       coin: "USD",
       img: img1,
-      },
-      {
+    },
+    {
       id: "James Thompson",
       title: "James Thompson",
       date: "06th January, 21:00",
       amount: 96384.0,
       coin: "USD",
       img: img1,
-      },
-      {
+    },
+    {
       id: "William Gonzalez",
       title: "William Gonzalez",
       date: "23rd September, 13:15",
       amount: 52468.0,
       coin: "USD",
       img: img2,
-      },
-      {
+    },
+    {
       id: "Brian Hall",
       title: "Brian Hall",
       date: "05th May, 08:00",
       amount: 39642.0,
       coin: "USD",
       img: img3,
-      },
-      {
+    },
+    {
       id: "Joshua Allen",
       title: "Joshua Allen",
       date: "16th June, 22:45",
       amount: 28541.0,
       coin: "USD",
       img: img4,
-      },
-      {
+    },
+    {
       id: "Matthew King",
       title: "Matthew King",
       date: "30th December, 17:30",
       amount: 14725.0,
       coin: "USD",
       img: img5,
-      }
+    },
+    {
+      id: "A1 Taxi Transportation",
+      title: "Taxi ride to Airport",
+      date: "15th January, 09:00",
+      amount: -120.0,
+      coin: "USD",
+      img: img1,
+    },
+    {
+      id: "B2 Taxi Transportation",
+      title: "Taxi ride to train station",
+      date: "20th February, 14:30",
+      amount: -230.5,
+      coin: "EUR",
+      img: img2,
+    },
+    {
+      id: "C3 Taxi Transportation",
+      title: "Taxi ride to downtown",
+      date: "10th March, 18:00",
+      amount: -345.0,
+      coin: "USD",
+      img: img3,
+    },
+    {
+      id: "D4 Taxi Transportation",
+      title: "Taxi ride to Convention Center",
+      date: "25th April, 08:00",
+      amount: -190.0,
+      coin: "EUR",
+      img: img4,
+    },
+    {
+      id: "E5 Taxi Transportation",
+      title: "Taxi ride to University",
+      date: "1st May, 16:00",
+      amount: -250.0,
+      coin: "USD",
+      img: img5,
+    },
+    {
+      id: "F6 Taxi Transportation",
+      title: "Taxi ride to mall",
+      date: "15th June, 14:00",
+      amount: -300.0,
+      coin: "EUR",
+      img: img1,
+    },
+    {
+      id: "G7 Taxi Transportation",
+      title: "Taxi ride to beach",
+      date: "20th July, 10:00",
+      amount: -210.0,
+      coin: "USD",
+      img: img2,
+    },
+    {
+      id: "H8 Taxi Transportation",
+      title: "Taxi ride to park",
+      date: "5th August, 18:00",
+      amount: -150.0,
+      coin: "EUR",
+      img: img3,
+    },
+    {
+      id: "I9 Taxi Transportation",
+      title: "Taxi ride to restaurant",
+      date: "15th September, 15:00",
+      amount: -320.0,
+      coin: "USD",
+      img: img4,
+    },
+    {
+      id: "J10 Taxi Transportation",
+      title: "Taxi ride to hotel",
+      date: "1st October, 12:00",
+      amount: -280.0,
+      coin: "EUR",
+      img: img5,
+    },
   ],
 })
 
@@ -189,8 +265,8 @@ mock.onGet("/Transactions").reply(200, {
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Home: undefined,
-  Settings: undefined,
+  Home: undefined
+  Settings: undefined
   AllTransactions: undefined
 }
 
@@ -210,9 +286,7 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false, animation:"fade_from_bottom" }}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false, animation: "fade_from_bottom" }}>
       <Stack.Screen name="Home" component={MenuNavigator}></Stack.Screen>
       <Stack.Screen name="Settings" component={SettingsScreen}></Stack.Screen>
       <Stack.Screen name="AllTransactions" component={AllTransactionsScreen}></Stack.Screen>

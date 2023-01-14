@@ -48,6 +48,7 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
           data={route.name === "AccountHistory" ? Transactions.slice(0,5) : Transactions}
           renderItem={renderItem}
           keyExtractor={(Transaction) => Transaction.id}
+          initialNumToRender={18}
         />
         {route.name === "AccountHistory" && (
           <Pressable style={$ViewAllButton} onPress={() => navigate("AllTransactions")}>
