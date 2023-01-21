@@ -17,7 +17,6 @@ const colorCode = (n: number) => {
 
 export function TransactionCard({ TransactionData, lastId }: TransactionCardProps) {
   const theme = useColorScheme()
-
   return (
     <View style={$TransactionCardContainer}>
       <View style={$TransactionCardIcon}>

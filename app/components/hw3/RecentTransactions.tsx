@@ -16,14 +16,17 @@ import { colors, spacing, typography } from "../../theme"
 import { Transaction } from "../../interfaces/interfaces"
 import { navigate } from "../../navigators"
 import { useRoute } from "@react-navigation/native"
+import Animated, {FadeIn, FadeOut} from "react-native-reanimated"
 
 interface RecentTransactionsProps {
   Transactions: Transaction[]
 }
 
 export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
+
   const theme = useColorScheme()
   const route = useRoute()
+  console.log(Transactions)
 
   const renderItem: ListRenderItem<Transaction> = ({ item: Transaction }) => (
     <TransactionCard
@@ -32,9 +35,9 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
     />
   )
   return (
-    <View>
+    <Animated.View entering={FadeIn} exiting={FadeOut}>
       <View
-        style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground, }}
+        style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground}}
       >
         <View style={$RecentTransactionsTitleSection}>
           <Text style={{ ...$RecentTransactionsTitleSectionText, color: colors[theme].text }}>
@@ -49,6 +52,7 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
           renderItem={renderItem}
           keyExtractor={(Transaction) => Transaction.id}
           initialNumToRender={18}
+          scrollEnabled={false}
         />
         {route.name === "AccountHistory" && (
           <Pressable style={$ViewAllButton} onPress={() => navigate("AllTransactions")}>
@@ -56,7 +60,7 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
           </Pressable>
         )}
       </View>
-    </View>
+    </Animated.View>
   )
 }
 

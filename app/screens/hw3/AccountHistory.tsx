@@ -9,20 +9,22 @@ import {
   Pressable,
   useColorScheme,
   Animated,
+  RefreshControl,
 } from "react-native"
 import { Screen, Text } from "../../components"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
-import axios from "axios"
 import { colors, spacing, typography } from "../../theme"
 import { ListAccounts } from "../../components/hw3/ListAccounts"
 import { Account, Transaction } from "../../interfaces/interfaces"
 import { navigate } from "../../navigators"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { BAR_HEIGHT } from "../../components/hw3/Menu"
+import { api } from "../../services/api"
 
 export function AccountHistory() {
   const [Accounts, setAccounts] = useState<Account[]>([])
   const [Transactions, setTransactions] = useState<Transaction[]>([])
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
 
   const translation = useRef(new Animated.Value(100)).current
   const opacity = useRef(new Animated.Value(0)).current
@@ -30,6 +32,19 @@ export function AccountHistory() {
   const theme = useColorScheme()
   const { bottom } = useSafeAreaInsets()
 
+  
+  const refreshData = async () => {
+    try {
+      ;(async () => {
+        setIsRefreshing(true)
+        const responseTransactions = await api.getTransactions();
+        setTransactions(responseTransactions.data.Transactions)
+        setIsRefreshing(false)
+      })()
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() => {
     Animated.parallel([
       Animated.timing(translation, {
@@ -45,12 +60,9 @@ export function AccountHistory() {
   useEffect(() => {
     try {
       ;(async () => {
-        const [responseAccounts, responseTransactions] = await Promise.all([
-          axios.get("/Accounts"),
-          axios.get("/Transactions"),
-        ])
-        setAccounts(responseAccounts.data.Accounts)
-        setTransactions(responseTransactions.data.Transactions)
+        const [AccountsResponse, TransactionsResponse] = await Promise.all([api.getAccounts(), api.getTransactions()])
+        setAccounts(AccountsResponse.data.Accounts)
+        setTransactions(TransactionsResponse.data.Transactions)
       })()
     } catch (error) {
       console.log(error)
@@ -60,6 +72,18 @@ export function AccountHistory() {
   return (
     <Screen
       style={{ ...$screenContainer, backgroundColor: colors[theme].background }}
+      preset="scroll"
+      ScrollViewProps={{
+        overScrollMode: "always",
+        refreshControl: (
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={refreshData}
+            tintColor="blue"
+            colors={["red"]}
+          />
+        ),
+      }}
       // safeAreaEdges={["top", "bottom"]}
     >
       <SafeAreaView

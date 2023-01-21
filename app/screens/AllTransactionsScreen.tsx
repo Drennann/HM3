@@ -9,6 +9,7 @@ import { Transaction } from "../interfaces/interfaces"
 import axios from "axios"
 import { colors } from "../theme"
 import { ScrollView } from "react-native-gesture-handler"
+import { api } from "../services/api"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
 
@@ -32,7 +33,7 @@ export const AllTransactionsScreen: FC<StackScreenProps<AppStackScreenProps, "Al
     useEffect(() => {
       try {
         ;(async () => {
-          const responseTransactions = await axios.get("/Transactions")
+          const responseTransactions = await api.getTransactions()
           setTransactions(responseTransactions.data.Transactions)
         })()
       } catch (error) {
