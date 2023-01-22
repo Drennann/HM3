@@ -36,7 +36,7 @@ export function RecentTransactions({ Transactions, CurrentAccount }: RecentTrans
   )
 
   return (
-    <Animated.View entering={FadeIn.delay(400)} exiting={FadeOut} key={CurrentAccount}>
+    <Animated.View entering={FadeIn.delay(500)} exiting={FadeOut.duration(5)} key={CurrentAccount}>
       <View
         style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground}}
       >

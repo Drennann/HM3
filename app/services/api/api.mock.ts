@@ -237,7 +237,7 @@ let accountTransactionsCounters = {
   [1]: 1,
   [2]: 1,
   [3]: 1,
-  [4]: Transactions.length-5
+  [4]: Transactions.length
 }
 
 mock.onGet(/\/accounts\/\d+\/transactions/).reply<Transaction[]>(config => {
