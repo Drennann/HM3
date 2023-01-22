@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   ViewStyle,
   Dimensions,
@@ -8,8 +8,8 @@ import {
   TextStyle,
   Pressable,
   useColorScheme,
-  Animated,
   RefreshControl,
+  ScrollView,
 } from "react-native"
 import { Screen, Text } from "../../components"
 import { RecentTransactions } from "../../components/hw3/RecentTransactions"
@@ -25,27 +25,24 @@ export function AccountHistory() {
   const [Accounts, setAccounts] = useState<Account[]>([])
   const [Transactions, setTransactions] = useState<Transaction[]>([])
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
-
-  const translation = useRef(new Animated.Value(100)).current
-  const opacity = useRef(new Animated.Value(0)).current
+  const [currentAccount, setCurrectAccount] = useState<number>(0)
 
   const theme = useColorScheme()
   const { bottom } = useSafeAreaInsets()
 
-  
   const refreshData = async () => {
     try {
       ;(async () => {
         setIsRefreshing(true)
-        const responseTransactions = await api.getTransactions();
-        setTransactions(responseTransactions.data.Transactions)
+        const responseTransactions = await api.getTransactions(currentAccount)
+        setTransactions(responseTransactions.data)
         setIsRefreshing(false)
       })()
     } catch (error) {
       console.log(error)
     }
   }
-  useEffect(() => {
+  /*   useEffect(() => {
     Animated.parallel([
       Animated.timing(translation, {
         toValue: 0,
@@ -55,19 +52,27 @@ export function AccountHistory() {
       }),
       Animated.timing(opacity, { toValue: 1, useNativeDriver: true, delay: 300, duration: 700 }),
     ]).start()
-  }, [])
+  }, []) */
 
   useEffect(() => {
     try {
       ;(async () => {
-        const [AccountsResponse, TransactionsResponse] = await Promise.all([api.getAccounts(), api.getTransactions()])
-        setAccounts(AccountsResponse.data.Accounts)
-        setTransactions(TransactionsResponse.data.Transactions)
+        const [AccountsResponse] = await Promise.all([
+          api.getAccounts(),
+        ])
+        setAccounts(AccountsResponse.data)
       })()
     } catch (error) {
       console.log(error)
     }
   }, [])
+
+  useEffect(()=>{
+    (async ()=>{
+      const TransactionsResponse = await api.getTransactions(currentAccount);
+      setTransactions(TransactionsResponse.data)
+    })()
+  },[currentAccount])
 
   return (
     <Screen
@@ -93,7 +98,7 @@ export function AccountHistory() {
           paddingBottom: BAR_HEIGHT + bottom + spacing.medium,
         }}
       >
-        <Animated.ScrollView style={{ transform: [{ translateY: translation }], opacity }}>
+        <ScrollView>
           {/* <Animated.View style={{...$animatedBox}}></Animated.View> */}
           <View style={$TitleSection}>
             <View style={$TitleSectionLeftView}></View>
@@ -104,10 +109,9 @@ export function AccountHistory() {
               </Pressable>
             </View>
           </View>
-
-          <ListAccounts Accounts={Accounts} />
-          <RecentTransactions Transactions={Transactions}/>
-        </Animated.ScrollView>
+          <ListAccounts Accounts={Accounts} onChangeCurrentAccount={setCurrectAccount} />
+          <RecentTransactions Transactions={Transactions} CurrentAccount={currentAccount}/>
+        </ScrollView>
       </SafeAreaView>
     </Screen>
   )

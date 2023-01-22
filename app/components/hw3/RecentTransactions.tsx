@@ -16,17 +16,17 @@ import { colors, spacing, typography } from "../../theme"
 import { Transaction } from "../../interfaces/interfaces"
 import { navigate } from "../../navigators"
 import { useRoute } from "@react-navigation/native"
-import Animated, {FadeIn, FadeOut} from "react-native-reanimated"
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated"
 
 interface RecentTransactionsProps {
-  Transactions: Transaction[]
+  Transactions: Transaction[],
+  CurrentAccount?: number
 }
 
-export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
+export function RecentTransactions({ Transactions, CurrentAccount }: RecentTransactionsProps) {
 
   const theme = useColorScheme()
   const route = useRoute()
-  console.log(Transactions)
 
   const renderItem: ListRenderItem<Transaction> = ({ item: Transaction }) => (
     <TransactionCard
@@ -34,8 +34,9 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
       lastId={Transactions[Transactions.length - 1].id === Transaction.id}
     />
   )
+
   return (
-    <Animated.View entering={FadeIn} exiting={FadeOut}>
+    <Animated.View entering={FadeIn.delay(400)} exiting={FadeOut} key={CurrentAccount}>
       <View
         style={{ ...$RecentTransactionsContainer, backgroundColor: colors[theme].cardBackground}}
       >
@@ -48,7 +49,7 @@ export function RecentTransactions({ Transactions }: RecentTransactionsProps) {
           </Pressable>
         </View>
         <FlatList
-          data={route.name === "AccountHistory" ? Transactions.slice(0,5) : Transactions}
+          data={route.name === "AccountHistory" ? Transactions : Transactions}
           renderItem={renderItem}
           keyExtractor={(Transaction) => Transaction.id}
           initialNumToRender={18}

@@ -6,7 +6,6 @@ import { AppStackScreenProps } from "../navigators"
 import { Screen } from "../components"
 import { RecentTransactions } from "../components/hw3/RecentTransactions"
 import { Transaction } from "../interfaces/interfaces"
-import axios from "axios"
 import { colors } from "../theme"
 import { ScrollView } from "react-native-gesture-handler"
 import { api } from "../services/api"
@@ -33,8 +32,8 @@ export const AllTransactionsScreen: FC<StackScreenProps<AppStackScreenProps, "Al
     useEffect(() => {
       try {
         ;(async () => {
-          const responseTransactions = await api.getTransactions()
-          setTransactions(responseTransactions.data.Transactions)
+          const responseTransactions = await api.getTransactions(4)
+          setTransactions(responseTransactions.data)
         })()
       } catch (error) {
         console.log(error)

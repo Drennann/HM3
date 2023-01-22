@@ -16,17 +16,19 @@ import { spacing } from "../../theme"
 import { Account } from "../../interfaces/interfaces"
 
 interface ListAccountsProps {
-  Accounts: Account[]
+  Accounts: Account[],
+  onChangeCurrentAccount?: (number) => void
 }
 
 const { width } = Dimensions.get("screen")
 
-export function ListAccounts({ Accounts }: ListAccountsProps) {
+export function ListAccounts({ Accounts, onChangeCurrentAccount }: ListAccountsProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const onMomentumScrollEnd = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const index = Math.ceil(event.nativeEvent.contentOffset.x / (width - 30))
     setCurrentIndex(index)
+    onChangeCurrentAccount(index)
   }
 
   const renderItem: ListRenderItem<Account> = ({ item: Account }) => (
